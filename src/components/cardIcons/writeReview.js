@@ -17,4 +17,4 @@ const WriteReviewIcon = ({ movie }) => {
   );
 };
 
-export default WriteReviewIcon;
+export default WriteReviewIcon; 
