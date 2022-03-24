@@ -28,10 +28,6 @@ const UpcomingMoviesPage = (props) => {
     [titleFiltering, genreFiltering]
   );
 
-  // if (isLoading) {
-  //   return <Spinner />;
-  // }
-
   if (isError) {
     return <h1>{error.message}</h1>;
   }
