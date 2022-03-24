@@ -6,6 +6,7 @@ import MoviePage from "./pages/movieDetailsPage";
 import FavouriteMoviesPage from "./pages/favoriteMoviesPage"; // NEW
 import MovieReviewPage from "./pages/movieReviewPage";
 import SiteHeader from './components/siteHeader';
+import UpcomingMoviesPage from './pages/upcomingMoviesPage'
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
      <SiteHeader />      {/* New Header  */}
       
       <Switch>
+        <Route path="/movies/upcoming" component={UpcomingMoviesPage} />
         <Route path="/reviews/:id" component={MovieReviewPage} />
         <Route exact path="/movies/favourites" component={FavouriteMoviesPage} />
         <Route path="/movies/:id" component={MoviePage} />
