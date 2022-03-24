@@ -7,6 +7,9 @@ import GridListTile from "@material-ui/core/GridListTile";
 import { getMovieImages } from "../../api/tmdb-api";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    paddingTop: theme.spacing(7),
+  },
   gridListRoot: {
     display: "flex",
     flexWrap: "wrap",
@@ -29,31 +32,31 @@ const TemplateMoviePage = ({ movie, children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <>
-      <MovieHeader movie={movie} />
+  return (    
+      <div className={classes.root}>
+        <MovieHeader movie={movie} />
 
-      <Grid container spacing={5} style={{ padding: "15px" }}>
-        <Grid item xs={3}>
-          <div className={classes.gridListRoot}>
-            <GridList cellHeight={500} className={classes.gridList} cols={1}>
-              {images.map((image) => (
-                <GridListTile key={image.file_path} className={classes.gridListTile} cols={1}>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
-                    alt={image.poster_path}
-                  />
-                </GridListTile>
-              ))}
-            </GridList>
-          </div>
-        </Grid>
+        <Grid container spacing={5} style={{ padding: "15px" }}>
+          <Grid item xs={3}>
+            <div className={classes.gridListRoot}>
+              <GridList cellHeight={500} className={classes.gridList} cols={1}>
+                {images.map((image) => (
+                  <GridListTile key={image.file_path} className={classes.gridListTile} cols={1}>
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
+                      alt={image.poster_path}
+                    />
+                  </GridListTile>
+                ))}
+              </GridList>
+            </div>
+          </Grid>
 
-        <Grid item xs={9}>
-          {children}
-        </Grid>
-      </Grid>
-    </>
+          <Grid item xs={9}>
+            {children}
+          </Grid>
+        </Grid>    
+    </div>
   );
 };
 
