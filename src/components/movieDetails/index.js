@@ -6,7 +6,6 @@ import MonetizationIcon from "@material-ui/icons/MonetizationOn";
 import StarRate from "@material-ui/icons/StarRate";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-// New
 import NavigationIcon from "@material-ui/icons/Navigation";
 import Fab from "@material-ui/core/Fab";
 import Drawer from "@material-ui/core/Drawer";
@@ -35,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   chipLabel: {
     margin: theme.spacing(0.5),
   },
-  fab: {  //New
+  fab: {  
     position: "fixed",
     top: theme.spacing(15),
     right: theme.spacing(2),
@@ -44,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
 const MovieDetails = ( {movie}) => {
   const classes = useStyles();
-  const [drawerOpen, setDrawerOpen] = useState(false); // New
+  const [drawerOpen, setDrawerOpen] = useState(false); 
 
   return (
     <>

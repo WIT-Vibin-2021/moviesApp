@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   appbar: {
-    // background: 'none',
+    backgroundColor: "rgb(3, 0, 0)",
   },
   offset: theme.mixins.toolbar,
 }));
