@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Chip from "@material-ui/core/Chip";
 import Paper from "@material-ui/core/Paper";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
@@ -6,6 +6,11 @@ import MonetizationIcon from "@material-ui/icons/MonetizationOn";
 import StarRate from "@material-ui/icons/StarRate";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+// New
+import NavigationIcon from "@material-ui/icons/Navigation";
+import Fab from "@material-ui/core/Fab";
+import Drawer from "@material-ui/core/Drawer";
+import MovieReviews from '../movieReviews'
 
 const useStyles = makeStyles((theme) => ({
   chipRoot: {
@@ -30,11 +35,16 @@ const useStyles = makeStyles((theme) => ({
   chipLabel: {
     margin: theme.spacing(0.5),
   },
+  fab: {  //New
+    position: "fixed",
+    top: theme.spacing(15),
+    right: theme.spacing(2),
+  },
 }));
 
-const MovieDetails = ( props) => {
+const MovieDetails = ( {movie}) => {
   const classes = useStyles();
-  const movie = props.movie
+  const [drawerOpen, setDrawerOpen] = useState(false); // New
 
   return (
     <>
@@ -68,20 +78,21 @@ const MovieDetails = ( props) => {
         />
         <Chip label={`Released: ${movie.release_date}`} />
       </Paper>
-      
-      <Paper component="ul" className={classes.chipSet}>
-        <li>
-          <Chip label="Production Countries" className={classes.chipLabel} color="primary" />
-        </li>
-        {movie.production_countries.map((g) => (
-          <li key={g.name}>
-            <Chip label={g.name} className={classes.chip} />
-          </li>
-        ))}
-      </Paper>
-
       </div>
-      </>
+      {/* New */}
+      <Fab    
+        color="secondary"
+        variant="extended"
+        onClick={() =>setDrawerOpen(true)}
+        className={classes.fab}
+      >
+        <NavigationIcon />
+        Reviews
+      </Fab>
+      <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+        <MovieReviews movie={movie} />
+      </Drawer>
+    </>
   );
 };
 export default  MovieDetails ;
