@@ -15,6 +15,7 @@ import StarRateIcon from "@material-ui/icons/StarRate";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import { MoviesContext } from "../../contexts/moviesContext";
+import {Tooltip} from "@material-ui/core"
 
 const useStyles = makeStyles({
   card: { maxWidth: 345 },
@@ -46,11 +47,13 @@ export default function MovieCard({ movie, action }) {
         ) : null
       }
       title={
-        <Typography variant="h5" component="p">
-          {movie.title}{" "}
-        </Typography>
+        <Tooltip  title={<h2 style={{ color: "white" }}>{movie.title}</h2>} >
+          <Typography variant="h5" component="p" noWrap="true">
+            {movie.title}{" "}
+          </Typography>
+        </Tooltip>
       }
-    />
+    />    
       <CardMedia
         className={classes.media}
         image={

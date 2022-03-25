@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
 function MovieListPageTemplate({ movies, title, action }) {
   const classes = useStyles();
   return (
+
       <div className={classes.root}>
         <Grid container >
           <Grid item xs={12}>
