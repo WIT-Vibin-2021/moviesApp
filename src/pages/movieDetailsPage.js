@@ -12,10 +12,7 @@ import Spinner from '../components/spinner'
 const MovieDetailsPage = (props) => {
   const { id } = useParams();
 
-  const { data: movie, error, isLoading, isError } = useQuery(
-    ["movie", { id: id }],
-    getMovie
-  );
+  const { data: movie, error, isLoading, isError } = useQuery(["movie", { id: id }],getMovie);
 
   if (isLoading) {
     return <Spinner />;

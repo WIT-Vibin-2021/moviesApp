@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
-import { getMovies } from "../api/tmdb-api";
+import { getMovies,getMoviePages } from "../api/tmdb-api";
 import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, { titleFilter, genreFilter,} from "../components/movieFilterUI";
 import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
@@ -19,11 +19,34 @@ const genreFiltering = {
 };
 
 const HomePage = (props) => {
-  const { data, error, isLoading, isError } = useQuery("discover", getMovies);
-  const { filterValues, setFilterValues, filterFunction } = useFiltering(
-    [],
-    [titleFiltering, genreFiltering]
-  );
+  //Pagination-------------------------------------
+  //commented for pagination // const { data, error, isLoading, isError } = useQuery("discover", getMovies);
+  const { filterValues, setFilterValues, filterFunction } = useFiltering([],[titleFiltering, genreFiltering]);
+
+  //Pagination-------------------------------------
+  const [page, setPage] = React.useState(1);
+  const fetchProjects = (page = 1) => fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}`).then((res) => res.json())
+  const {
+    isLoading,
+    isError,
+    error,
+    data,
+    isFetching,
+    isPreviousData,
+  } = useQuery(['projects', page], () => fetchProjects(page), { keepPreviousData : true })
+    
+
+  //const Nextpage =(page) => {    
+  //  const { data: error, isLoading, isError } = useQuery(["pages", { id: page }],getMoviePages);
+  //}
+
+  const btnClick = (event) => {
+    let currentpage = page;
+    currentpage = currentpage +1 ;
+    setPage(currentpage);   
+   }
+
+  //Pagination---------------------------------------
 
   if (isLoading) {
     return <Spinner />;
@@ -35,18 +58,15 @@ const HomePage = (props) => {
 
   const changeFilterValues = (type, value) => {
     const newf = { name: type, value: value };
-    const newFilters =
-      type === "title" ? [newf, filterValues[1]] : [filterValues[0], newf];
+    const newFilters = type === "title" ? [newf, filterValues[1]] : [filterValues[0], newf];
     setFilterValues(newFilters);
   };
 
+  console.log(data)
+  console.log(page)
+  console.log("setPage")
   const movies = data ? data.results : [];
   const displayedMovies = filterFunction(movies);
-
-  // // Redundant, but necessary to avoid app crashing.
-  // const favourites = movies.filter((m) => m.favorite);
-  // localStorage.setItem("favourites", JSON.stringify(favourites));
-  // const addToFavourites = (movieId) => true;
 
   return (
     <>
@@ -62,6 +82,23 @@ const HomePage = (props) => {
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
       />
+    _________________________________
+      <span>Current Page: {page}</span>
+       <button
+         onClick={() => setPage(old => Math.max(old - 1, 0))}
+         disabled={page === 1}
+       >
+         Previous Page
+       </button>{' '}
+       <button
+         onClick={() => setPage(old => Math.max(old + 1, 0))}
+         
+         // Disable the Next Page button until we know a next page is available
+         //disabled={isPreviousData || !data?.hasMore}
+       >
+         Next Page
+       </button>
+       {isFetching ? <span> Loading...</span> : null}{' '}
     </>
   );
 };
