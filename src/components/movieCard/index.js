@@ -48,7 +48,7 @@ export default function MovieCard({ movie, action }) {
       }
       title={
         <Tooltip  title={<h2 style={{ color: "white" }}>{movie.title}</h2>} >
-          <Typography variant="h5" component="p" noWrap="true">
+          <Typography variant="h5" component="p">
             {movie.title}{" "}
           </Typography>
         </Tooltip>

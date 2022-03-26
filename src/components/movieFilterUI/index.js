@@ -10,7 +10,7 @@ export const titleFilter = function (movie, value) {
 
 export const genreFilter = function (movie, value) {
   const genreId = Number(value);
-  return genreId > 0 ? movie.genre_ids.includes(genreId) : true;
+  return genreId > 0 ? movie.genre_ids.includes(genreId) : true;   
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -48,6 +48,7 @@ const MovieFilterUI = ({ filterInputChange, titleFilter, genreFilter }) => {
           onUserInput={filterInputChange}
           titleFilter={titleFilter}
           genreFilter={genreFilter}
+          //languageFilter={langualeFilter}
         />
       </Drawer>
     </>

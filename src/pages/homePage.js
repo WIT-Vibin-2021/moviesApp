@@ -24,7 +24,9 @@ const genreFiltering = {
 };
 
 const HomePage = (props) => {
+  
   const { filterValues, setFilterValues, filterFunction } = useFiltering([],[titleFiltering, genreFiltering]);
+
   //Pagination - Open
   //commented for pagination // const { data, error, isLoading, isError } = useQuery("discover", getMovies);  
   const [page, setPage] = React.useState(1);  
@@ -69,6 +71,7 @@ const HomePage = (props) => {
         filterInputChange={changeFilterValues}
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
+        //languageFilter={filterValues[2].value}
       />
         {/* Next and Previous Pagination Tags - Open       
         <button

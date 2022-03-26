@@ -4,8 +4,9 @@ const useFiltering = (data, filters) => {
   const [filterValues, setFilterValues] = useState(() => {
     const filterInitialValues = filters.map((f) => ({
       name: f.name,
-      value: f.value,
+      value: f.value,      
     }));
+    console.log(filterInitialValues)
     return filterInitialValues;
   });
 
