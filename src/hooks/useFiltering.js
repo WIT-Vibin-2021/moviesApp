@@ -6,7 +6,7 @@ const useFiltering = (data, filters) => {
       name: f.name,
       value: f.value,      
     }));
-    console.log(filterInitialValues)
+    //console.log(filterInitialValues)
     return filterInitialValues;
   });
 

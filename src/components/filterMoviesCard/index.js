@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 export default function FilterMoviesCard(props) {
   const classes = useStyles();
   const { data, error, isLoading, isError } = useQuery("genres", getGenres);
-  //const { data_lang, error_lang, isLoading_lang, isError_lang } = useQuery("language", getLanguages);
+  //const { data, error, isLoading, isError }= useQuery("language", getLanguages);
 
   if (isLoading) {
     return <Spinner />;
@@ -44,7 +44,10 @@ export default function FilterMoviesCard(props) {
     genres.unshift({ id: "0", name: "All" });
   }
 
-  //const languages = data.languages;
+  //console.log(data)
+  //const languages = console.log(data_lang)
+  //console.log(languages[1])
+  //const languages = data_lang[0]
   // if (languages[0].name !== "All") {
   //   languages.unshift({ id: "0", name: "All" });
   // }
@@ -62,9 +65,9 @@ export default function FilterMoviesCard(props) {
     handleUserImput(e, "genre", e.target.value);
   };
 
-  // const handleLanguageChange = (e) => {
-  //   handleUserImput(e, "language", e.target.value);
-  // };
+  const handleLanguageChange = (e) => {
+    handleUserImput(e, "language", e.target.value);
+  };
 
   return (
     <>
