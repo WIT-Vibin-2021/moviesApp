@@ -13,6 +13,11 @@ export const genreFilter = function (movie, value) {
   return genreId > 0 ? movie.genre_ids.includes(genreId) : true;   
 };
 
+export const languageFilter = function (movie, value) {
+  const languageId = Number(value);
+  return languageId > 0 ? movie.language_ids.includes(languageId) : true;   
+};
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#bfbfbf",
@@ -25,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MovieFilterUI = ({ filterInputChange, titleFilter, genreFilter }) => {
+const MovieFilterUI = ({ filterInputChange, titleFilter, genreFilter, languageFilter }) => {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -48,6 +53,7 @@ const MovieFilterUI = ({ filterInputChange, titleFilter, genreFilter }) => {
           onUserInput={filterInputChange}
           titleFilter={titleFilter}
           genreFilter={genreFilter}
+          languageFilter={languageFilter}
           //languageFilter={langualeFilter}
         />
       </Drawer>

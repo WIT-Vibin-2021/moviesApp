@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 import { getMovies,getMoviePages } from "../api/tmdb-api";
 import useFiltering from "../hooks/useFiltering";
-import MovieFilterUI, { titleFilter, genreFilter,} from "../components/movieFilterUI";
+import MovieFilterUI, { titleFilter, genreFilter,languageFilter} from "../components/movieFilterUI";
 import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
 import { ThreeSixty } from "@material-ui/icons";
 import { Pagination } from "@material-ui/lab";
@@ -23,9 +23,15 @@ const genreFiltering = {
   condition: genreFilter,
 };
 
+// const languageFiltering = {
+//   name: "language",
+//   value: "0",
+//   condition: languageFilter,
+// };
+
 const HomePage = (props) => {
   
-  const { filterValues, setFilterValues, filterFunction } = useFiltering([],[titleFiltering, genreFiltering]);
+  const { filterValues, setFilterValues, filterFunction } = useFiltering([],[titleFiltering, genreFiltering]); //,languageFiltering
 
   //Pagination - Open
   //commented for pagination // const { data, error, isLoading, isError } = useQuery("discover", getMovies);  
@@ -92,7 +98,8 @@ const HomePage = (props) => {
         </div>
         <div align="center">
         <Pagination
-          count={data.total_pages}
+          // Limited to 500, TMDB API will allow max of 500 pages other than data.totalpages
+          count={500} 
           variant="outlined" color="secondary"   shape="rounded" 
           className='pagination'
           page={page}

@@ -9,7 +9,7 @@ import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { getGenres } from "../../api/tmdb-api";
+import { getGenres,getLanguages } from "../../api/tmdb-api";
 
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 export default function FilterMoviesCard(props) {
   const classes = useStyles();
   const { data, error, isLoading, isError } = useQuery("genres", getGenres);
+  //const { data_lang, error_lang, isLoading_lang, isError_lang } = useQuery("language", getLanguages);
 
   if (isLoading) {
     return <Spinner />;
@@ -43,6 +44,11 @@ export default function FilterMoviesCard(props) {
     genres.unshift({ id: "0", name: "All" });
   }
 
+  //const languages = data.languages;
+  // if (languages[0].name !== "All") {
+  //   languages.unshift({ id: "0", name: "All" });
+  // }
+
   const handleUserImput = (e, type, value) => {
     e.preventDefault();
     props.onUserInput(type, value); // NEW
@@ -55,6 +61,10 @@ export default function FilterMoviesCard(props) {
   const handleGenreChange = (e) => {
     handleUserImput(e, "genre", e.target.value);
   };
+
+  // const handleLanguageChange = (e) => {
+  //   handleUserImput(e, "language", e.target.value);
+  // };
 
   return (
     <>
@@ -89,6 +99,23 @@ export default function FilterMoviesCard(props) {
               );
             })}
           </Select>
+
+          {/* <InputLabel id="language-label">Language</InputLabel>
+          <Select
+            labelId="language-label"
+            id="language-select"
+            value={props.languageFilter}
+            onChange={handleLanguageChange}
+          >
+            {languages.map((language) => {
+              return (
+                <MenuItem key={language.id} value={language.id}>
+                  {language.name}
+                </MenuItem>
+              );
+            })}
+          </Select> */}
+
         </FormControl>
       </CardContent>
     </Card>
