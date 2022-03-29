@@ -7,6 +7,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import HomeIcon from "@material-ui/icons/Home";
 import { useHistory } from "react-router-dom";
+import { Movie, PlayArrow } from "@material-ui/icons";
+import {Tooltip} from "@material-ui/core"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,13 +32,13 @@ const MovieHeader = ({ movie }) => {
       <IconButton aria-label="go back" onClick={() => history.goBack()}>
         <ArrowBackIcon color="primary" fontSize="large" />
       </IconButton>
-      <Typography variant="h4" component="h3">
-        {movie.title}
-        <a href={movie.homepage}>
-          <HomeIcon color="primary" />
-        </a>
-        <br />
+      <Typography variant="h4" component="h3" align="Center">
+        {movie.title}<br/>
         <span className={classes.tagLine}>{`   "${movie.tagline}"`} </span>
+        <br/> 
+        <Tooltip  title={<h3 style={{ color: "white" }}>{movie.homepage}</h3>}>
+        <a href={movie.homepage}><Movie color="primary" fontSize="large" style={{ color: 'red' }} /></a>       
+        </Tooltip>
       </Typography>
       <IconButton aria-label="go forward" onClick={() => history.goForward()}>
         <ArrowForwardIcon color="primary" fontSize="large" />

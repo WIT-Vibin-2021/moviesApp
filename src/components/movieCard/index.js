@@ -19,6 +19,7 @@ import {Tooltip} from "@material-ui/core"
 
 const useStyles = makeStyles({
   card: { maxWidth: 345 },
+  text: { maxHeight: 20 },
   media: { height: 500 },
   avatar: {
     backgroundColor: "rgb(255, 0, 0)",
@@ -48,13 +49,14 @@ export default function MovieCard({ movie, action }) {
       }
       title={
         <Tooltip  title={<h2 style={{ color: "white" }}>{movie.title}</h2>} >
-          <Typography variant="h5" component="p">
+          <Typography className={classes.text} variant="h5" component="p">
             {movie.title}{" "}
           </Typography>
         </Tooltip>
-      }
-    />    
-      <CardMedia
+      }      
+      />    
+      <Tooltip  title={<h2 style={{ color: "white" }}>{movie.title}</h2>} >
+      <CardMedia 
         className={classes.media}
         image={
           movie.poster_path
@@ -62,6 +64,7 @@ export default function MovieCard({ movie, action }) {
             : `${process.env.PUBLIC_URL}/assets/film-poster-placeholder.png`
         }
       />
+      </Tooltip>
       <CardContent>
         <Grid container>
           <Grid item xs={6}>
