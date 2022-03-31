@@ -1,4 +1,4 @@
-import React from "react"; 
+import React,{useEffect, useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -10,16 +10,14 @@ import SearchIcon from "@material-ui/icons/Search";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { getGenres,getLanguages } from "../../api/tmdb-api";
-
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
-  },
+  },  
   media: { height: 300 },
-
   formControl: {
     margin: theme.spacing(1),
     minWidth: 220,
@@ -30,7 +28,13 @@ const useStyles = makeStyles((theme) => ({
 export default function FilterMoviesCard(props) {
   const classes = useStyles();
   const { data, error, isLoading, isError } = useQuery("genres", getGenres);
-  //const { data, error, isLoading, isError }= useQuery("language", getLanguages);
+  const [datalanguages, setLanguages] = useState([]);
+
+  useEffect(() => {
+    getLanguages().then((datalanguages) => {
+      setLanguages(datalanguages);
+    });    
+  }, []);
 
   if (isLoading) {
     return <Spinner />;
@@ -39,22 +43,15 @@ export default function FilterMoviesCard(props) {
   if (isError) {
     return <h1>{error.message}</h1>;
   }
+
   const genres = data.genres;
   if (genres[0].name !== "All") {
     genres.unshift({ id: "0", name: "All" });
   }
 
-  //console.log(data)
-  //const languages = console.log(data_lang)
-  //console.log(languages[1])
-  //const languages = data_lang[0]
-  // if (languages[0].name !== "All") {
-  //   languages.unshift({ id: "0", name: "All" });
-  // }
-
   const handleUserImput = (e, type, value) => {
     e.preventDefault();
-    props.onUserInput(type, value); // NEW
+    props.onUserInput(type, value); // NEW    
   };
 
   const handleTextChange = (e, props) => {
@@ -64,7 +61,7 @@ export default function FilterMoviesCard(props) {
   const handleGenreChange = (e) => {
     handleUserImput(e, "genre", e.target.value);
   };
-
+  
   const handleLanguageChange = (e) => {
     handleUserImput(e, "language", e.target.value);
   };
@@ -102,23 +99,23 @@ export default function FilterMoviesCard(props) {
               );
             })}
           </Select>
-
-          {/* <InputLabel id="language-label">Language</InputLabel>
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <InputLabel id="language-label">Language</InputLabel>
           <Select
             labelId="language-label"
             id="language-select"
             value={props.languageFilter}
             onChange={handleLanguageChange}
           >
-            {languages.map((language) => {
+            {datalanguages.map((language) => {
               return (
-                <MenuItem key={language.id} value={language.id}>
-                  {language.name}
+                <MenuItem key={language.iso_639_1} value={language.iso_639_1}>
+                  {language.english_name}
                 </MenuItem>
               );
             })}
-          </Select> */}
-
+          </Select>
         </FormControl>
       </CardContent>
     </Card>

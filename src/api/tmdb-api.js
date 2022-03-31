@@ -46,9 +46,7 @@
   
   export const getGenres = async () => {
     return fetch(
-      "https://api.themoviedb.org/3/genre/movie/list?api_key=" +
-        process.env.REACT_APP_TMDB_KEY +
-        "&language=en-US"
+      "https://api.themoviedb.org/3/genre/movie/list?api_key=" + process.env.REACT_APP_TMDB_KEY + "&language=en-US"
     ).then( (response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -60,25 +58,16 @@
       throw error
    });
   };
-
-  export const getLanguages = async () => {
+  
+  export const getLanguages = () => {
     return fetch(
-      "https://api.themoviedb.org/3/configuration/languages?api_key=" + process.env.REACT_APP_TMDB_KEY 
-    ).then( (response) => {
-      if (!response.ok) {
-        throw new Error(response.json().message);
-      }                      
-      return response.json()
-    })
-    .then(data => console.log(data[0]))
-    .catch((error) => {
-      throw error
-   });
+      "https://api.themoviedb.org/3/configuration/languages?api_key=" + process.env.REACT_APP_TMDB_KEY
+    )
+      .then((response) => response.json())
+      .then((json) => json);
+      //console.log(response.json())   
   };
-  
 
-  
-  
   export const getMovieImages = ({ queryKey }) => {
     const [, idPart] = queryKey;
     const { id } = idPart;
@@ -89,7 +78,6 @@
         throw new Error(response.json().message);
       }
       return response.json();
-  
     })
     .catch((error) => {
       throw error
@@ -106,6 +94,7 @@
         return json.results;
       });
   };
+
   export const getUpcomingMovies = () => {
     return fetch(
       `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
@@ -119,7 +108,8 @@
       .catch((error) => {
         throw error;
       });
-  }; 
+  };
+
   export const getTopRatedMovies = () => {
     return fetch(          
       `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=true&page=1`

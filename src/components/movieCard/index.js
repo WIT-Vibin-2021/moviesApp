@@ -28,7 +28,7 @@ const useStyles = makeStyles({
 
 export default function MovieCard({ movie, action }) {  
   const classes = useStyles();
-  const { favourites, addToFavourites } = useContext(MoviesContext);
+  const { favourites } = useContext(MoviesContext);
 
   if (favourites.find((id) => id === movie.id)) {
     movie.favourite = true;

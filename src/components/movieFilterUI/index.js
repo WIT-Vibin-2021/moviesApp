@@ -14,9 +14,9 @@ export const genreFilter = function (movie, value) {
 };
 
 export const languageFilter = function (movie, value) {
-  const languageId = Number(value);
-  return languageId > 0 ? movie.language_ids.includes(languageId) : true;   
-};
+  const languageId = (value);
+  return languageId != "" && languageId != "xx" ? movie.original_language.includes(languageId) : true;
+};  //Ref: https://www.themoviedb.org/talk/52312a4c19c29536de06caf7    Time being "xx" and null as "No Language"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,7 +54,6 @@ const MovieFilterUI = ({ filterInputChange, titleFilter, genreFilter, languageFi
           titleFilter={titleFilter}
           genreFilter={genreFilter}
           languageFilter={languageFilter}
-          //languageFilter={langualeFilter}
         />
       </Drawer>
     </>

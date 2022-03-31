@@ -8,9 +8,6 @@ import MovieFilterUI, { titleFilter, genreFilter,languageFilter} from "../compon
 import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
 import { ThreeSixty } from "@material-ui/icons";
 import { Pagination } from "@material-ui/lab";
-//import { number } from "prop-types";
-//import Pagination from "../components/Pagination/pagination";
-//import ReactPaginate from "react-paginate";
 
 const titleFiltering = {
   name: "title",
@@ -23,15 +20,18 @@ const genreFiltering = {
   condition: genreFilter,
 };
 
-// const languageFiltering = {
-//   name: "language",
-//   value: "0",
-//   condition: languageFilter,
-// };
+const languageFiltering = {
+  name: "language",
+  value: "",
+  condition: languageFilter,
+};
 
 const HomePage = (props) => {
   
-  const { filterValues, setFilterValues, filterFunction } = useFiltering([],[titleFiltering, genreFiltering]); //,languageFiltering
+  const { filterValues, setFilterValues, filterFunction } = useFiltering(
+    [],    
+    [titleFiltering, genreFiltering, languageFiltering]
+  );
 
   //Pagination - Open
   //commented for pagination // const { data, error, isLoading, isError } = useQuery("discover", getMovies);  
@@ -53,7 +53,20 @@ const HomePage = (props) => {
 
   const changeFilterValues = (type, value) => {
     const newf = { name: type, value: value };
-    const newFilters = type === "title" ? [newf, filterValues[1]] : [filterValues[0], newf];
+    //const newFilters = type === "title" ? [newf, filterValues[1]] : [filterValues[0], newf];
+    var newFilters = [];  
+    switch(type){
+      case "language":
+        newFilters =  [filterValues[0],filterValues[1], newf];
+        break;
+      case "title":
+        newFilters = [newf, filterValues[1], filterValues[2]];
+        break;
+      case "genre":
+        newFilters =  [filterValues[0], newf, filterValues[2]];
+        break;      
+      //default: newFilters = []; break;
+    }
     setFilterValues(newFilters);
   };
   const movies = data ? data.results : [];
@@ -77,8 +90,9 @@ const HomePage = (props) => {
         filterInputChange={changeFilterValues}
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
-        //languageFilter={filterValues[2].value}
+        languageFilter={filterValues[2].value}
       />
+        {/* Pagination -Simple - Next and Previous button */}
         {/* Next and Previous Pagination Tags - Open       
         <button
           onClick={() => setPage(old => Math.max(old - 1, 0))}
@@ -97,6 +111,7 @@ const HomePage = (props) => {
         <span>Current Page: {page}</span>
         </div>
         <div align="center">
+        {/* Pagination - Orignal - < 1 2 3 4...500 > */}
         <Pagination
           // Limited to 500, TMDB API will allow max of 500 pages other than data.totalpages
           count={500} 
