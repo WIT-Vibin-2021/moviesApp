@@ -8,10 +8,10 @@ import MovieReviewPage from "./pages/movieReviewPage";
 import SiteHeader from './components/siteHeader';
 import UpcomingMoviesPage from './pages/upcomingMoviesPage'
 import { QueryClientProvider, QueryClient } from "react-query";
-import { ReactQueryDevtools } from 'react-query/devtools'
 import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage'
 import TopRatedMoviesPage from './pages/topRatedMoviesPage'
+import MoviesSearchPage from './pages/moviesSearchPage'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,6 +31,7 @@ const App = () => {
         <MoviesContextProvider>
         
         <Switch>
+          <Route path="/search/:query" component={MoviesSearchPage} />
           <Route path="/movies/toprated" component={TopRatedMoviesPage} />
           <Route exact path="/reviews/form" component={AddMovieReviewPage} />
           <Route path="/movies/upcoming" component={UpcomingMoviesPage} />

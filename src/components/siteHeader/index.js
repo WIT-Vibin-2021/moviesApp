@@ -5,14 +5,15 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
-
 import MenuIcon from "@material-ui/icons/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import { useHistory } from "react-router-dom";
+import { useHistory,Link } from "react-router-dom";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import tmdbLogo from "../../images/tmdb.svg"
+import Input from '@material-ui/core/Input';
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -24,10 +25,18 @@ const useStyles = makeStyles((theme) => ({
   appbar: {
     backgroundColor: "rgb(3,37,65)",
   },
-  offset: theme.mixins.toolbar,
+  offset: theme.mixins.toolbar,  
+  input: {
+    //background: "white",
+    color: "#28BAD2",
+    width:"200px"
+  },
+  searchButton: {    
+    color: "#28BAD2",    
+  }
 }));
 
-const SiteHeader = () => {
+const SiteHeader = () => {  
   const classes = useStyles();
   const  history = useHistory()
   const [anchorEl, setAnchorEl] = useState(null);
@@ -51,7 +60,12 @@ const SiteHeader = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  return ( 
+const routeChange = () =>{ 
+  var name = document.getElementById("search").value
+  let path = `/search/` +name; 
+  history.push(path);
+}
+  return (     
     <>
       <AppBar className={classes.appbar}
       position="fixed" elevation={0} color='primary'> 
@@ -61,8 +75,14 @@ const SiteHeader = () => {
               <img src={tmdbLogo} alt="React Logo" />
             </div>
           </Typography>
-          <Typography variant="h6" className={classes.title}>
-               All you ever wanted to know about Movies!
+          <Typography variant="h6" className={classes.title}>             
+            <Input id ="search" className={classes.input}  placeholder="Movies Search" />
+            <IconButton className={classes.searchButton} type="submit" sx={{ p: '5px' }} aria-label="search">   
+            <Button className={classes.searchButton} 
+            // variant="outlined" 
+            startIcon={<SearchIcon />} 
+            onClick={routeChange}/>            
+            </IconButton>      
           </Typography>
           {isMobile ? (
             <>
@@ -73,7 +93,7 @@ const SiteHeader = () => {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <MenuIcon />
+              <MenuIcon />
               </IconButton>
               <Menu
                 id="menu-appbar"

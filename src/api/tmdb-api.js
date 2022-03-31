@@ -123,4 +123,24 @@
       .catch((error) => {
         throw error;
       });
-  }; 
+  };
+
+  // Movies Search by Keywords
+  export const getMovieByKeyWord = (args) => {
+    console.log(args)
+    const [, idPart] = args.queryKey;
+    const { query } = idPart
+    console.log(args.queryKey.query)    
+    return fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&query=${query}&page=1&include_adult=false`)      
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error
+   });
+  };
+  // Movies Search by Keywords
