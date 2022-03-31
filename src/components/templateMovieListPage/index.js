@@ -6,7 +6,7 @@ import MovieList from "../movieList";
 
 const useStyles = makeStyles((theme) => ({
   root: { 
-    backgroundColor: "rgb(0, 0, 0)",
+    backgroundColor: "rgb(3,37,65)",
     minHeight: "100vh",
     paddingTop: theme.spacing(7),
   }

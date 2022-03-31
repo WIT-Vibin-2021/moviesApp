@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Chip from "@material-ui/core/Chip";
 import Paper from "@material-ui/core/Paper";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
@@ -11,6 +11,10 @@ import NavigationIcon from "@material-ui/icons/Navigation";
 import Fab from "@material-ui/core/Fab";
 import Drawer from "@material-ui/core/Drawer";
 import MovieReviews from '../movieReviews'
+import { Language } from "@material-ui/icons";
+import {Tooltip} from "@material-ui/core"
+
+
 
 const useStyles = makeStyles((theme) => ({
   chipRoot: {
@@ -45,7 +49,9 @@ const useStyles = makeStyles((theme) => ({
 const MovieDetails = ( {movie}) => {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false); 
-
+  // const handleClick = () => {
+  //   window.open({movie.homepage});
+  // };
   return (
     <>    
       <Typography variant="h5" component="h3" >
@@ -76,7 +82,12 @@ const MovieDetails = ( {movie}) => {
           icon={<StarRate />}
           label={`${movie.vote_average} (${movie.vote_count}`}
         />
-        <Chip icon={<TheatersIcon />}label={`Released: ${movie.release_date}`} />
+        <Chip icon={<TheatersIcon />}label={`Released: ${movie.release_date}`} />        
+      </Paper>  <br></br>
+      <Paper component="ul" className={classes.chipSet} elevation={0} >      
+        <Tooltip  title={<h3 style={{ color: "white" }}>{movie.homepage}</h3>}>        
+        <Chip icon={<Language />}label="Movie Home Page" color="primary" variant="outlined" component="a" href={movie.homepage} clickable />  
+        </Tooltip>
       </Paper>
       </div>
       {/* New */}

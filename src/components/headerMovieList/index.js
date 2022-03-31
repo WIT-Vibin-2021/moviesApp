@@ -23,7 +23,7 @@ const Header = (props ) => {
   const title = props.title
   const history = useHistory(); 
   return (
-    <Paper component="div" className={classes.root}>
+    <Paper component="div" className={classes.root} elevation={0} variant="outlined" square>
       <IconButton aria-label="go back" onClick={() => history.goBack()}>
         <ArrowBackIcon color="primary" fontSize="large" />
       </IconButton>

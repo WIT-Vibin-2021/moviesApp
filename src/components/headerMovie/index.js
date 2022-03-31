@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-around",
     alignItems: "center",
     flexWrap: "wrap",
-    padding: theme.spacing(1.5),
+    padding: theme.spacing(1.5),      
   },
   tagLine: {
     fontSize: "1.5rem",
@@ -28,7 +28,7 @@ const MovieHeader = ({ movie }) => {
   const history = useHistory();
 
   return (
-    <Paper component="div" className={classes.root}>
+    <Paper component="div" className={classes.root} elevation={0} variant="outlined" square >
       <IconButton aria-label="go back" onClick={() => history.goBack()}>
         <ArrowBackIcon color="primary" fontSize="large" />
       </IconButton>
@@ -36,9 +36,9 @@ const MovieHeader = ({ movie }) => {
         {movie.title}<br/>
         <span className={classes.tagLine}>{`   "${movie.tagline}"`} </span>
         <br/> 
-        <Tooltip  title={<h3 style={{ color: "white" }}>{movie.homepage}</h3>}>
+        {/* <Tooltip  title={<h3 style={{ color: "white" }}>{movie.homepage}</h3>}>
         <a href={movie.homepage}><Movie color="primary" fontSize="large" style={{ color: 'red' }} /></a>       
-        </Tooltip>
+        </Tooltip> */}
       </Typography>
       <IconButton aria-label="go forward" onClick={() => history.goForward()}>
         <ArrowForwardIcon color="primary" fontSize="large" />

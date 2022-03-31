@@ -12,13 +12,17 @@ import Menu from "@material-ui/core/Menu";
 import { useHistory } from "react-router-dom";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import tmdbLogo from "../../images/tmdb.svg"
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    flexGrow: 1,
+    flexGrow: 1,    
+  },
+  logo:{
+    width:200
   },
   appbar: {
-    backgroundColor: "rgb(3, 0, 0)",
+    backgroundColor: "rgb(3,37,65)",
   },
   offset: theme.mixins.toolbar,
 }));
@@ -52,11 +56,13 @@ const SiteHeader = () => {
       <AppBar className={classes.appbar}
       position="fixed" elevation={0} color='primary'> 
         <Toolbar>
-          <Typography variant="h4" className={classes.title}>
-            TMDB Client
+          <Typography variant="h4" className={classes.title}>           
+            <div className={classes.logo}>
+              <img src={tmdbLogo} alt="React Logo" />
+            </div>
           </Typography>
           <Typography variant="h6" className={classes.title}>
-            All you ever wanted to know about Movies!
+               All you ever wanted to know about Movies!
           </Typography>
           {isMobile ? (
             <>

@@ -74,9 +74,8 @@ const HomePage = (props) => {
   
   // console.log(data)
   // console.log(page)
-  // console.log("setPage")
-
-  return (
+  // console.log("setPage")  
+  return (    
     <>
     
       <PageTemplate
@@ -110,7 +109,7 @@ const HomePage = (props) => {
         <div align="center">
         <span>Current Page: {page}</span>
         </div>
-        <div align="center">
+        <div>
         {/* Pagination - Orignal - < 1 2 3 4...500 > */}
         <Pagination
           // Limited to 500, TMDB API will allow max of 500 pages other than data.totalpages
