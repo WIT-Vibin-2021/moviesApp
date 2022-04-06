@@ -77,12 +77,11 @@ const routeChange = () =>{
           </Typography>
           <Typography variant="h6" className={classes.title}>             
             <Input id ="search" className={classes.input}  placeholder="Movies Search" />
-            <IconButton className={classes.searchButton} type="submit" sx={{ p: '5px' }} aria-label="search">   
-            <Button className={classes.searchButton} 
-            // variant="outlined" 
-            startIcon={<SearchIcon />} 
-            onClick={routeChange}/>            
+            <IconButton className={classes.searchButton} type="submit" sx={{ p: '5px' }} aria-label="search"
+            onClick={routeChange}>   
+              <SearchIcon />            
             </IconButton>      
+            {/* <Button className={classes.searchButton} variant="outlined" startIcon={<SearchIcon />} onClick={routeChange}/> */}
           </Typography>
           {isMobile ? (
             <>
