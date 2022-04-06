@@ -29,7 +29,13 @@ export default function FilterMoviesCard(props) {
   const classes = useStyles();
   const { data, error, isLoading, isError } = useQuery("genres", getGenres);
   const [datalanguages, setLanguages] = useState([]);
+  const [sortOptions, setSortOptions] = useState([
+    { sortVal: "none", sortName: "None" },
+    { sortVal: "movie-asc", sortName: "Movies in Ascending" },
+    { sortVal: "movie-desc", sortName: "Movies in Descending" }
+  ]);
 
+  // API Call for list of language
   useEffect(() => {
     getLanguages().then((datalanguages) => {
       setLanguages(datalanguages);
@@ -49,22 +55,32 @@ export default function FilterMoviesCard(props) {
     genres.unshift({ id: "0", name: "All" });
   }
 
-  const handleUserImput = (e, type, value) => {
+  const handleUserInput = (e, type, value) => {
     e.preventDefault();
     props.onUserInput(type, value); // NEW    
   };
 
   const handleTextChange = (e, props) => {
-    handleUserImput(e, "title", e.target.value);
+    handleUserInput(e, "title", e.target.value);
   };
 
   const handleGenreChange = (e) => {
-    handleUserImput(e, "genre", e.target.value);
+    handleUserInput(e, "genre", e.target.value);
   };
   
   const handleLanguageChange = (e) => {
-    handleUserImput(e, "language", e.target.value);
+    handleUserInput(e, "language", e.target.value);
   };
+
+  //Sorting Handling
+  const handleUserInputSort = (e, type, value) => {
+    e.preventDefault();
+    props.onUserSortInput(type, value);
+  };
+  const handleSortChange = (e) => {
+    handleUserInputSort(e, "sort", e.target.value);
+  };
+  //Sorting Handling
 
   return (
     <>
@@ -125,6 +141,23 @@ export default function FilterMoviesCard(props) {
             <SearchIcon fontSize="large" />
             Sort the movies.
           </Typography>
+          <FormControl className={classes.formControl}>
+          <InputLabel id="sort-label">Sort</InputLabel>
+          <Select
+            labelId="sort-label"
+            id="sort-select"
+            value={props.sortingValue}
+            onChange={handleSortChange}
+          >
+            {sortOptions.map((options) => {
+              return (
+                <MenuItem key={options.sortVal} value={options.sortVal}>
+                  {options.sortName}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
         </CardContent>
       </Card>
       </>

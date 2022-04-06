@@ -18,6 +18,20 @@ export const languageFilter = function (movie, value) {
   return languageId != "" && languageId != "xx" ? movie.original_language.includes(languageId) : true;
 };  //Ref: https://www.themoviedb.org/talk/52312a4c19c29536de06caf7    Time being "xx" and null as "No Language"
 
+export const sortingValue = function (movies, sortValue) {
+  var sorted_out = movies;
+  if(sortValue === "movie-asc")
+  {
+    sorted_out = movies.sort((a, b) => (a.title - b.title))
+  }
+  else if(sortValue === "movie-desc")
+  {
+    var temp = movies.sort((a, b) => (b.title - a.title))
+    sorted_out = temp.reverse();
+  }
+  return sorted_out;
+};
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#bfbfbf",
@@ -30,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MovieFilterUI = ({ filterInputChange, titleFilter, genreFilter, languageFilter }) => {
+const MovieFilterUI = ({ filterInputChange, sortingInputChange, titleFilter, genreFilter, languageFilter, sortingValue }) => {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -51,9 +65,11 @@ const MovieFilterUI = ({ filterInputChange, titleFilter, genreFilter, languageFi
       >
         <FilterCard
           onUserInput={filterInputChange}
+          onUserSortInput={sortingInputChange}
           titleFilter={titleFilter}
           genreFilter={genreFilter}
           languageFilter={languageFilter}
+          sortingValue={sortingValue}
         />
       </Drawer>
     </>

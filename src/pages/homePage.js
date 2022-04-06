@@ -4,9 +4,9 @@ import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 import { getMovies,getMoviePages } from "../api/tmdb-api";
 import useFiltering from "../hooks/useFiltering";
-import MovieFilterUI, { titleFilter, genreFilter,languageFilter} from "../components/movieFilterUI";
+import useMovieSorting from "../hooks/useMovieSorting";
+import MovieFilterUI, { titleFilter, genreFilter,languageFilter, sortingValue} from "../components/movieFilterUI";
 import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
-import { ThreeSixty } from "@material-ui/icons";
 import { Pagination } from "@material-ui/lab";
 
 const titleFiltering = {
@@ -25,13 +25,27 @@ const languageFiltering = {
   value: "",
   condition: languageFilter,
 };
-
-const HomePage = (props) => {
-  
+const sortingOrderValue = {
+  name: "None",
+  value: "",
+  condition: sortingValue,
+};
+const HomePage = (props) => {  
+  // useFiltering is a Hook
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [],    
     [titleFiltering, genreFiltering, languageFiltering]
   );
+
+  const { sortValues, setSortValues, sortFunction } = useMovieSorting(
+    [],
+    [sortingOrderValue]
+  );
+
+  const changeSortValues = (type, value) => {
+    const sortValues = { name: type, value: value };
+    setSortValues(sortValues);
+  }
 
   //Pagination - Open
   //commented for pagination // const { data, error, isLoading, isError } = useQuery("discover", getMovies);  
@@ -70,8 +84,9 @@ const HomePage = (props) => {
     setFilterValues(newFilters);
   };
   const movies = data ? data.results : [];
-  const displayedMovies = filterFunction(movies);
-  
+  var displayedMovies = filterFunction(movies);  
+  displayedMovies = sortFunction(displayedMovies);
+
   // console.log(data)
   // console.log(page)
   // console.log("setPage")  
@@ -87,9 +102,11 @@ const HomePage = (props) => {
       />      
       <MovieFilterUI
         filterInputChange={changeFilterValues}
+        sortingInputChange={changeSortValues}
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
         languageFilter={filterValues[2].value}
+        sortingValue={sortValues}
       />
         {/* Pagination -Simple - Next and Previous button */}
         {/* Next and Previous Pagination Tags - Open       
