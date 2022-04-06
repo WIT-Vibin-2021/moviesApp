@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   input: {
     //background: "white",
     color: "#28BAD2",
-    width:"200px"
+    // width:"200px"
   },
   searchButton: {    
     color: "#28BAD2",    
@@ -65,6 +65,13 @@ const routeChange = () =>{
   let path = `/search/` +name; 
   history.push(path);
 }
+const handleKeyDown = (e) => {
+  if (e.key === 'Enter') {
+    var name = document.getElementById("search").value
+    let path = `/search/` +name; 
+    history.push(path);
+  }
+}
   return (     
     <>
       <AppBar className={classes.appbar}
@@ -76,7 +83,7 @@ const routeChange = () =>{
             </div>
           </Typography>
           <Typography variant="h6" className={classes.title}>             
-            <Input id ="search" className={classes.input}  placeholder="Movies Search" />
+            <Input id ="search" className={classes.input}  placeholder="Movies Search" onKeyDown={handleKeyDown} />
             <IconButton className={classes.searchButton} type="submit" sx={{ p: '5px' }} aria-label="search"
             onClick={routeChange}>   
               <SearchIcon />            
@@ -94,7 +101,7 @@ const routeChange = () =>{
               >
               <MenuIcon />
               </IconButton>
-              <Menu
+              <Menu 
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
@@ -124,7 +131,7 @@ const routeChange = () =>{
               {menuOptions.map((opt) => (
                 <Button
                   key={opt.label}
-                  color="inherit"
+                  className={classes.input}
                   onClick={() => handleMenuSelect(opt.path)}
                 >
                   {opt.label}

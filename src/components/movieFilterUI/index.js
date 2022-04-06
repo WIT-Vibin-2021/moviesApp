@@ -3,6 +3,9 @@ import Fab from "@material-ui/core/Fab";
 import FilterCard from "../filterMoviesCard";
 import Drawer from "@material-ui/core/Drawer";
 import { makeStyles } from "@material-ui/core/styles";
+import FilterListIcon from "@material-ui/icons/FilterList"
+import SortIcon from "@material-ui/icons/Sort"
+
 
 export const titleFilter = function (movie, value) {
   return movie.title.toLowerCase().search(value.toLowerCase()) !== -1;
@@ -37,11 +40,14 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#bfbfbf",
   },
   fab: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(7.5),
     position: "fixed",
-    top: theme.spacing(2),
+    top: theme.spacing(1),
     right: theme.spacing(2),
   },
+  paper: {
+    background: "#bfbfbf"
+  }
 }));
 
 const MovieFilterUI = ({ filterInputChange, sortingInputChange, titleFilter, genreFilter, languageFilter, sortingValue }) => {
@@ -51,19 +57,20 @@ const MovieFilterUI = ({ filterInputChange, sortingInputChange, titleFilter, gen
   return (
     <>
       <Fab
-        color="secondary"
+        color="primary"
         variant="extended"
         onClick={() => setDrawerOpen(true)}
         className={classes.fab}
-      >
-        Filter
+      ><FilterListIcon/>  
+        Filter / Sort   
+        <SortIcon/> 
       </Fab>
-      <Drawer
+      <Drawer  classes={{ paper: classes.paper }}
         anchor="left"
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
       >
-        <FilterCard
+        <FilterCard 
           onUserInput={filterInputChange}
           onUserSortInput={sortingInputChange}
           titleFilter={titleFilter}

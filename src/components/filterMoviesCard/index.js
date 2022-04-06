@@ -12,28 +12,27 @@ import Select from "@material-ui/core/Select";
 import { getGenres,getLanguages } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
+import FilterListIcon from "@material-ui/icons/FilterList"
+import SortIcon from "@material-ui/icons/Sort"
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
+    backgroundColor: "rgb(232,232,232)",    
   },  
   media: { height: 300 },
   formControl: {
     margin: theme.spacing(1),
     minWidth: 220,
-    backgroundColor: "rgb(255, 255, 255)",
-  },
+    backgroundColor: "rgb(232,232,232)",     
+  },  
 }));
 
 export default function FilterMoviesCard(props) {
   const classes = useStyles();
   const { data, error, isLoading, isError } = useQuery("genres", getGenres);
   const [datalanguages, setLanguages] = useState([]);
-  const [sortOptions, setSortOptions] = useState([
-    { sortVal: "none", sortName: "None" },
-    { sortVal: "movie-asc", sortName: "Movies in Ascending" },
-    { sortVal: "movie-desc", sortName: "Movies in Descending" }
-  ]);
+  const [sortOptions, setSortOptions] = useState([]);
 
   // API Call for list of language
   useEffect(() => {
@@ -49,7 +48,7 @@ export default function FilterMoviesCard(props) {
   if (isError) {
     return <h1>{error.message}</h1>;
   }
-
+  //--- Set the dropdownliat ------------------
   const genres = data.genres;
   if (genres[0].name !== "All") {
     genres.unshift({ id: "0", name: "All" });
@@ -59,6 +58,7 @@ export default function FilterMoviesCard(props) {
     e.preventDefault();
     props.onUserInput(type, value); // NEW    
   };
+  //--- Set the dropdownliat -----------------
 
   const handleTextChange = (e, props) => {
     handleUserInput(e, "title", e.target.value);
@@ -78,8 +78,10 @@ export default function FilterMoviesCard(props) {
     props.onUserSortInput(type, value);
   };
   const handleSortChange = (e) => {
-    handleUserInputSort(e, "sort", e.target.value);
+    handleUserInputSort(e, "sort-select", e.target.value); 
+    console.log(e.target.value);      
   };
+  
   //Sorting Handling
 
   return (
@@ -87,10 +89,12 @@ export default function FilterMoviesCard(props) {
     <Card className={classes.root} variant="outlined">
       <CardContent>
         <Typography variant="h5" component="h1">
-          <SearchIcon fontSize="large" />
-          Filter the movies.
+          <FilterListIcon fontSize="small" />
+          Filter the movies
         </Typography>
         <TextField
+          InputProps={{className: classes.input}}
+          InputLabelProps={{className: classes.input}}
           className={classes.formControl}
           id="filled-search"
           label="Search field"
@@ -101,7 +105,7 @@ export default function FilterMoviesCard(props) {
         />
         <FormControl className={classes.formControl}>
           <InputLabel id="genre-label">Genre</InputLabel>
-          <Select
+          <Select            
             labelId="genre-label"
             id="genre-select"
             value={props.genreFilter}
@@ -116,6 +120,7 @@ export default function FilterMoviesCard(props) {
             })}
           </Select>
         </FormControl>
+        
         <FormControl className={classes.formControl}>
           <InputLabel id="language-label">Language</InputLabel>
           <Select
@@ -134,32 +139,27 @@ export default function FilterMoviesCard(props) {
           </Select>
         </FormControl>
       </CardContent>
-    </Card>
-    <Card className={classes.root} variant="outlined">
-        <CardContent>
-          <Typography variant="h5" component="h1">
-            <SearchIcon fontSize="large" />
-            Sort the movies.
-          </Typography>
-          <FormControl className={classes.formControl}>
-          <InputLabel id="sort-label">Sort</InputLabel>
+    
+      <CardContent>
+        <Typography variant="h5" component="h1">
+        <SortIcon fontSize="small" />
+          Sort the movies.
+        </Typography>
+        <FormControl className={classes.formControl}>
+          <InputLabel id="sort-label">Movie Sorting</InputLabel>
           <Select
             labelId="sort-label"
-            id="sort-select"
-            value={props.sortingValue}
+            id="sort-select"            
+            value={props.sortingValue}                   
             onChange={handleSortChange}
-          >
-            {sortOptions.map((options) => {
-              return (
-                <MenuItem key={options.sortVal} value={options.sortVal}>
-                  {options.sortName}
-                </MenuItem>
-              );
-            })}
+          >            
+          <MenuItem value={"none"}>None</MenuItem>
+          <MenuItem value={"movie-asc"}>Movies in Ascending</MenuItem>
+          <MenuItem value={"movie-desc"}>Movies in Descending</MenuItem>               
           </Select>
-        </FormControl>
-        </CardContent>
-      </Card>
+        </FormControl>        
+      </CardContent>
+    </Card>
       </>
   );
 }
