@@ -23,7 +23,7 @@ const genreFiltering = {
 
 const MoviesByKey = (props) => {
   const { query } = useParams();
-  const { data, error, isLoading, isError } = useQuery(["movieByKeyWord",{ query: query }] , getSimilarMovies);
+  const { data, error, isLoading, isError } = useQuery(["movieSimilar",{ query: query }] , getSimilarMovies);
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [],
     [titleFiltering, genreFiltering]

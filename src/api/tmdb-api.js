@@ -145,7 +145,6 @@
   };
   // Movies Search by Keywords
 
-    // Movies Search by Keywords
     export const getSimilarMovies = (args) => {
       console.log(args)
       const [, idPart] = args.queryKey;
@@ -163,4 +162,15 @@
         throw error
      });
     };
-    // Movies Search by Keywords
+  
+
+    export const getVideo = (movieId) => {
+      console.log("TMDB API" + "http://api.themoviedb.org/3/movie/"+movieId+"/videos?api_key=" + process.env.REACT_APP_TMDB_KEY)
+      return fetch(
+        "http://api.themoviedb.org/3/movie/"+movieId+"/videos?api_key=" + process.env.REACT_APP_TMDB_KEY        
+      )
+        .then((response) => response.json())
+        .then((json) => json);
+        //console.log(response.json())   
+    };
+    

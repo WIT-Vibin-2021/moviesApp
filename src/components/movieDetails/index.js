@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback,useEffect, useState } from "react";
 import Chip from "@material-ui/core/Chip";
 import Paper from "@material-ui/core/Paper";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
@@ -14,7 +14,7 @@ import MovieReviews from '../movieReviews'
 import { Language, MovieSharp, SignalCellular0Bar } from "@material-ui/icons";
 import {Tooltip} from "@material-ui/core"
 import Popup from "../PopUp";
-
+import { getVideo } from "../../api/tmdb-api";
 
 const useStyles = makeStyles((theme) => ({
   chipRoot: {
@@ -51,9 +51,13 @@ const MovieDetails = ( {movie}) => {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);   
   const [buttonPopUp, setButtonPopUp] = useState(false);
-  // const handleClick = () => {
-  //   window.open({movie.homepage});
-  // };
+  const [moviePopUp, setmoviePopUp] = useState("");
+  const [videoData, setvideoData] = useState([]);
+  useEffect(() => {
+    getVideo(movie.id).then((videoData) => {
+      setvideoData(videoData);
+    });    
+  }, []);
   return (
     <>    
       <Typography variant="h5" component="h3" >
@@ -92,25 +96,26 @@ const MovieDetails = ( {movie}) => {
         </Tooltip>
       </Paper>
       <Paper component="ul" className={classes.chipSet} elevation={0} >             
-          <Chip icon={<MovieSharp />}label="Similar Movies (Keywords & Genres)" color="primary" variant="outlined"  component="a" href={`/similar/${movie.id}`} clickable />           
+          <Chip icon={<MovieSharp />}label="Similar Movies (Keywords & Genres)" 
+          color="primary" variant="outlined"  component="a" href={`/similar/${movie.id}`} clickable />           
       </Paper>
-
+{/* ------------------------------------------------------------------------------- */}
       <Paper component="ul" className={classes.chipSet} elevation={0} >             
           <Chip icon={<MovieSharp />}label="Video" 
-          onClick={()=>setButtonPopUp(true)}
+          onClick={()=>{setButtonPopUp(true); setmoviePopUp(videoData.results[0].key)}}
           color="primary" variant="outlined" clickable />           
       </Paper>
-      
-      </div>
-      <Popup trigger={buttonPopUp} setTrigger={setButtonPopUp} >           
-      </Popup>      
+      <Popup trigger={buttonPopUp} setTrigger={setButtonPopUp} trigger2={moviePopUp}>           
+      </Popup>
+      </div>            
+{/* ------------------------------------------------------------------------------- */}            
       <Fab    
         color="secondary"
         variant="extended"
         onClick={() =>setDrawerOpen(true)}
         className={classes.fab}
       >
-        <NavigationIcon />
+      <NavigationIcon />
         Reviews
       </Fab>
       <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
