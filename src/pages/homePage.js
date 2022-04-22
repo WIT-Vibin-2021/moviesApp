@@ -106,7 +106,7 @@ const HomePage = (props) => {
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
         languageFilter={filterValues[2].value}
-        sortingValue={sortValues}
+        sortingValue={sortValues.value}
       />
         {/* Pagination -Simple - Next and Previous button */}
         {/* Next and Previous Pagination Tags - Open       

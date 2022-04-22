@@ -12,6 +12,7 @@ import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage'
 import TopRatedMoviesPage from './pages/topRatedMoviesPage'
 import MoviesSearchPage from './pages/moviesSearchPage'
+import SimilarMovies from './pages/similarMovies'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,6 +32,7 @@ const App = () => {
         <MoviesContextProvider>
         
         <Switch>
+          <Route path="/similar/:query" component={SimilarMovies} />
           <Route path="/search/:query" component={MoviesSearchPage} />
           <Route path="/movies/toprated" component={TopRatedMoviesPage} />
           <Route exact path="/reviews/form" component={AddMovieReviewPage} />

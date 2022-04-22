@@ -11,7 +11,7 @@ import NavigationIcon from "@material-ui/icons/Navigation";
 import Fab from "@material-ui/core/Fab";
 import Drawer from "@material-ui/core/Drawer";
 import MovieReviews from '../movieReviews'
-import { Language } from "@material-ui/icons";
+import { Language, MovieSharp, SignalCellular0Bar } from "@material-ui/icons";
 import {Tooltip} from "@material-ui/core"
 
 
@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
     listStyle: "none",
     padding: theme.spacing(1.5),
     margin: 0,
+    Bold:20
   },
   chipLabel: {
     margin: theme.spacing(0.5),
@@ -63,7 +64,7 @@ const MovieDetails = ( {movie}) => {
       <div className={classes.chipRoot}>
       <Paper component="ul" className={classes.chipSet} elevation={0} >
         <li>
-          <Chip label="Genres" className={classes.chipLabel} color="primary" />
+          <Chip label="Genres" className={classes.chipLabel} color="primary" />          
         </li>
         {movie.genres.map((g) => (
           <li key={g.name}> 
@@ -89,8 +90,11 @@ const MovieDetails = ( {movie}) => {
         <Chip icon={<Language />}label="Movie Home Page" color="primary" variant="outlined" component="a" href={movie.homepage} clickable />  
         </Tooltip>
       </Paper>
-      </div>
-      {/* New */}
+      <Paper component="ul" className={classes.chipSet} elevation={0} >             
+          <Chip icon={<MovieSharp />}label="Similar Movies (Keywords & Genres)" color="primary" variant="outlined"  component="a" href={`/similar/${movie.id}`} clickable />  
+          
+      </Paper>
+      </div>      
       <Fab    
         color="secondary"
         variant="extended"
@@ -106,4 +110,4 @@ const MovieDetails = ( {movie}) => {
     </>
   );
 };
-export default  MovieDetails ;
+export default  MovieDetails ; 
