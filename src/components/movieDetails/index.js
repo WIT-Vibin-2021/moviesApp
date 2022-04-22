@@ -13,7 +13,7 @@ import Drawer from "@material-ui/core/Drawer";
 import MovieReviews from '../movieReviews'
 import { Language, MovieSharp, SignalCellular0Bar } from "@material-ui/icons";
 import {Tooltip} from "@material-ui/core"
-
+import Popup from "../PopUp";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -49,7 +49,8 @@ const useStyles = makeStyles((theme) => ({
 
 const MovieDetails = ( {movie}) => {
   const classes = useStyles();
-  const [drawerOpen, setDrawerOpen] = useState(false); 
+  const [drawerOpen, setDrawerOpen] = useState(false);   
+  const [buttonPopUp, setButtonPopUp] = useState(false);
   // const handleClick = () => {
   //   window.open({movie.homepage});
   // };
@@ -91,10 +92,18 @@ const MovieDetails = ( {movie}) => {
         </Tooltip>
       </Paper>
       <Paper component="ul" className={classes.chipSet} elevation={0} >             
-          <Chip icon={<MovieSharp />}label="Similar Movies (Keywords & Genres)" color="primary" variant="outlined"  component="a" href={`/similar/${movie.id}`} clickable />  
-          
+          <Chip icon={<MovieSharp />}label="Similar Movies (Keywords & Genres)" color="primary" variant="outlined"  component="a" href={`/similar/${movie.id}`} clickable />           
       </Paper>
-      </div>      
+
+      <Paper component="ul" className={classes.chipSet} elevation={0} >             
+          <Chip icon={<MovieSharp />}label="Video" 
+          onClick={()=>setButtonPopUp(true)}
+          color="primary" variant="outlined" clickable />           
+      </Paper>
+      
+      </div>
+      <Popup trigger={buttonPopUp} setTrigger={setButtonPopUp} >           
+      </Popup>      
       <Fab    
         color="secondary"
         variant="extended"

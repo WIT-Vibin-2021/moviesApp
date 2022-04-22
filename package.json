@@ -14,7 +14,8 @@
     "react-query": "^3.13.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^5.0.0",
-    "react-scroll": "^1.8.1"
+    "react-scroll": "^1.8.1",
+    "reactjs-popup": "^2.0.5"
   },
   "scripts": {
     "storybook": "start-storybook -p 6006 -s public",
