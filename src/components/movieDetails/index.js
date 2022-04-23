@@ -108,7 +108,7 @@ const MovieDetails = ( {movie}) => {
       <Popup trigger={buttonPopUp} setTrigger={setButtonPopUp} trigger2={moviePopUp}>           
       </Popup>
       </div>            
-{/* ------------------------------------------------------------------------------- */}            
+{/* -------------------------------------------------------------------------------- */}            
       <Fab    
         color="secondary"
         variant="extended"

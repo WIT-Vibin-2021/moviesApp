@@ -92,6 +92,7 @@ export default function FilterMoviesCard(props) {
           <FilterListIcon fontSize="small" />
           Filter the movies
         </Typography>
+        {/* ---------------Serach------------------- */}
         <TextField
           InputProps={{className: classes.input}}
           InputLabelProps={{className: classes.input}}
@@ -99,10 +100,10 @@ export default function FilterMoviesCard(props) {
           id="filled-search"
           label="Search field"
           type="search"
-          value={props.titleFilter}
-          variant="filled"
+          value={props.titleFilter}          
           onChange={handleTextChange}
         />
+        {/* ----------Genres ----------------*/}
         <FormControl className={classes.formControl}>
           <InputLabel id="genre-label">Genre</InputLabel>
           <Select            
@@ -120,7 +121,7 @@ export default function FilterMoviesCard(props) {
             })}
           </Select>
         </FormControl>
-        
+        {/* ---------Language-------------------- */}
         <FormControl className={classes.formControl}>
           <InputLabel id="language-label">Language</InputLabel>
           <Select
@@ -139,25 +140,27 @@ export default function FilterMoviesCard(props) {
           </Select>
         </FormControl>
       </CardContent>
-    
+
+      {/* --------Sort--------------------------- */}
       <CardContent>
         <Typography variant="h5" component="h1">
         <SortIcon fontSize="small" />
           Sort the movies.
         </Typography>
+
         <FormControl className={classes.formControl}>
-          <InputLabel id="sort-label">Movie Sorting</InputLabel>
+          <InputLabel id="sort-label">Sorting Order</InputLabel>
           <Select
             labelId="sort-label"
             id="sort-select"            
             value={props.sortingValue}                   
             onChange={handleSortChange}
-          >            
-          <MenuItem value={"none"}>None</MenuItem>
+          >                      
           <MenuItem value={"movie-asc"}>Movies in Ascending</MenuItem>
           <MenuItem value={"movie-desc"}>Movies in Descending</MenuItem>               
           </Select>
-        </FormControl>        
+        </FormControl>               
+
       </CardContent>
     </Card>
       </>

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import Fab from "@material-ui/core/Fab";
 import FilterCard from "../filterMoviesCard";
+import MoviesSearchCriteria from "../moviesearchcriteria"
 import Drawer from "@material-ui/core/Drawer";
 import { makeStyles } from "@material-ui/core/styles";
 import FilterListIcon from "@material-ui/icons/FilterList"
 import SortIcon from "@material-ui/icons/Sort"
+import { Search } from "@material-ui/icons";
 
 
 export const titleFilter = function (movie, value) {
@@ -45,6 +47,12 @@ const useStyles = makeStyles((theme) => ({
     top: theme.spacing(1),
     right: theme.spacing(2),
   },
+  fabSerach: {
+    marginTop: theme.spacing(7.5),
+    position: "fixed",
+    top: theme.spacing(1),
+    left: theme.spacing(2),
+  },
   paper: {
     background: "#bfbfbf"
   }
@@ -53,7 +61,8 @@ const useStyles = makeStyles((theme) => ({
 const MovieFilterUI = ({ filterInputChange, sortingInputChange, titleFilter, genreFilter, languageFilter, sortingValue }) => {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
-
+  const [drawerSearchOpen, setDrawerSearchOpen] = useState(false);
+ 
   return (
     <>
       <Fab
@@ -65,11 +74,24 @@ const MovieFilterUI = ({ filterInputChange, sortingInputChange, titleFilter, gen
         Filter / Sort   
         <SortIcon/> 
       </Fab>
+      
+      {/* -------------Search Button------------------------------ */}
+      <Fab
+        color="secondary"
+        variant="extended"      
+        onClick={() => setDrawerSearchOpen(true)}
+        className={classes.fabSerach}
+      >
+        Search   
+        <Search/> 
+      </Fab>
+      {/* ------------------------------------------- */}
+
       <Drawer  classes={{ paper: classes.paper }}
         anchor="left"
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
-      >
+      >        
         <FilterCard 
           onUserInput={filterInputChange}
           onUserSortInput={sortingInputChange}
@@ -79,6 +101,22 @@ const MovieFilterUI = ({ filterInputChange, sortingInputChange, titleFilter, gen
           sortingValue={sortingValue}
         />
       </Drawer>
+      {/* --------------Search----------------------------- */}
+      <Drawer  classes={{ paper: classes.paper }}
+        anchor="right"
+        open={drawerSearchOpen}
+        onClose={() => setDrawerSearchOpen(false)}
+      >
+        <MoviesSearchCriteria 
+          // onUserInput={filterInputChange}
+          // onUserSortInput={sortingInputChange}
+          // titleFilter={titleFilter}
+          // genreFilter={genreFilter}
+          // languageFilter={languageFilter}
+          // sortingValue={sortingValue}
+        />
+      </Drawer>
+      {/* ------------------------------------------- */}
     </>
   );
 };

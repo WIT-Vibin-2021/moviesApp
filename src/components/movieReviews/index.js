@@ -27,7 +27,7 @@ export default function MovieReviews({ movie }) {
     });
         
   }, []);
-
+ 
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="reviews table">
@@ -44,7 +44,7 @@ export default function MovieReviews({ movie }) {
               <TableCell component="th" scope="row">
                 {r.author}
               </TableCell>
-              <TableCell >{excerpt(r.content)}</TableCell>
+              {/* <TableCell >{excerpt(r.content)}</TableCell> */}
               <TableCell >
                 <Link
                   to={{
