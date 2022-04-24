@@ -13,6 +13,7 @@ import AddMovieReviewPage from './pages/addMovieReviewPage'
 import TopRatedMoviesPage from './pages/topRatedMoviesPage'
 import MoviesSearchPage from './pages/moviesSearchPage'
 import SimilarMovies from './pages/similarMovies'
+import MoviesCriteria from './pages/moviesCriteriaSearchPage'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,6 +33,8 @@ const App = () => {
         <MoviesContextProvider>
         
         <Switch>
+          <Route path="/searchcriteria/:generid/:lang/:year/:sort" component={MoviesCriteria} />
+          
           <Route path="/similar/:query" component={SimilarMovies} />
           <Route path="/search/:query" component={MoviesSearchPage} />
           <Route path="/movies/toprated" component={TopRatedMoviesPage} />

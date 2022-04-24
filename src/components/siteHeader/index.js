@@ -16,24 +16,24 @@ import Input from '@material-ui/core/Input';
 import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
-  title: {
-    flexGrow: 1,    
+  root: {      
+    backgroundColor:"#FFFFFF",
+    display: "flex",
+    justifyContent: "space-between",
+    backgroundColor: "rgb(3,37,65)",
+    fontFamily:"sans-serif",
+    fontWeight:"bold",
   },
   logo:{
-    width:200
-  },
-  appbar: {
-    backgroundColor: "rgb(3,37,65)",
+    width:200 
   },
   offset: theme.mixins.toolbar,  
   input: {
-    //background: "white",
-    color: "#28BAD2",
-    // width:"200px"
-  },
-  searchButton: {    
     color: "#28BAD2",    
-  }
+  },
+  searchButton: {        
+    color: "#28BAD2",    
+  },  
 }));
 
 const SiteHeader = () => {  
@@ -48,14 +48,26 @@ const SiteHeader = () => {
     { label: "Home", path: "/" },
     { label: "Favorites", path: "/movies/favourites" },
     { label: "Upcoming", path: "/movies/upcoming" },
-    { label: "Top-Rated", path: "/movies/toprated" },    
-    { label: "Option 4", path: "/" },
+    { label: "People", path: "/movies/people" },    
+    
   ];
 
   const handleMenuSelect = (pageURL) => {
     history.push(pageURL);
   };
+    
+  function handleClick(event) {
+    if (anchorEl !== event.currentTarget) {
+      setAnchorEl(event.currentTarget);
+    }
+  }
 
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleLeave = (event) => {
+    setAnchorEl(null);
+  };
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -73,23 +85,15 @@ const handleKeyDown = (e) => {
   }
 }
   return (     
-    <>
-      <AppBar className={classes.appbar}
+    <div>
+      <AppBar className={classes.root}
       position="fixed" elevation={0} color='primary'> 
-        <Toolbar>
-          <Typography variant="h4" className={classes.title}>           
+        <Toolbar className={classes.root}>
+          <Typography variant="h4" >           
             <div className={classes.logo}>
-              <img src={tmdbLogo} alt="React Logo" />
+              <img src={tmdbLogo} alt="React Logo" onClick={() => handleMenuSelect( "/")}/>
             </div>
-          </Typography>
-          <Typography variant="h6" className={classes.title}>             
-            <Input id ="search" className={classes.input}  placeholder="Movies Search" onKeyDown={handleKeyDown} />
-            <IconButton className={classes.searchButton} type="submit" sx={{ p: '5px' }} aria-label="search"
-            onClick={routeChange}>   
-              <SearchIcon />            
-            </IconButton>      
-            {/* <Button className={classes.searchButton} variant="outlined" startIcon={<SearchIcon />} onClick={routeChange}/> */}
-          </Typography>
+          </Typography>                  
           {isMobile ? (
             <>
               <IconButton
@@ -128,20 +132,57 @@ const handleKeyDown = (e) => {
             </>
           ) : (
             <>
-              {menuOptions.map((opt) => (
-                <Button
-                  key={opt.label}
-                  className={classes.input}
-                  onClick={() => handleMenuSelect(opt.path)}
+              <div>                                              
+                <Button  color="inherit"
+                      id="fade-buttonHome"
+                      onClick={() => handleMenuSelect( "/")}
                 >
-                  {opt.label}
+                  <b>Home</b>
                 </Button>
-              ))}
+                <Button  color="inherit"
+                  aria-owns={anchorEl ? "simple-menu" : undefined}
+                  aria-haspopup="true"
+                  onClick={handleClick}
+                  onMouseOver={handleClick}
+                >
+                 <b> Movies</b>
+                </Button>                
+                    <Menu   
+                      disableScrollLock={true}
+                      id="simple-menu"
+                      anchorEl={anchorEl}
+                      open={Boolean(anchorEl)}
+                      onClose={handleClose}
+                      MenuListProps={{ onMouseLeave: handleClose }}
+                    >
+                      <MenuItem onClick={() => handleMenuSelect( "/movies/upcoming")}>Upcoming</MenuItem>
+                      <MenuItem onClick={() => handleMenuSelect( "/movies/favourites")}>Favorites</MenuItem>
+                      <MenuItem onClick={() => handleMenuSelect( "/movies/toprated")}>Top-Rated</MenuItem>                                 
+                    </Menu> 
+                <Button  color="inherit"
+                  aria-owns={anchorEl ? "simple-menu" : undefined}
+                  aria-haspopup="true"
+                  // onClick={handleClick}
+                  // onMouseOver={handleClick}
+                >
+                 <b> People</b>
+                </Button>                   
+               {/* ------------------------  */}
+              </div>
             </>
           )}
+          <Typography  variant="h6" className={classes.search}>             
+            <Input id ="search" className={classes.input}  placeholder="Movies Search" onKeyDown={handleKeyDown} />
+            <IconButton className={classes.searchButton} type="submit" sx={{ p: '5px' }} aria-label="search"
+            onClick={routeChange}>   
+              <SearchIcon />            
+            </IconButton>      
+            {/* <Button className={classes.searchButton} variant="outlined" startIcon={<SearchIcon />} onClick={routeChange}/> */}
+          </Typography>
+
         </Toolbar>
       </AppBar>
-    </>
+    </div>
   );
 };
 

@@ -156,8 +156,8 @@ export default function FilterMoviesCard(props) {
             value={props.sortingValue}                   
             onChange={handleSortChange}
           >                      
-          <MenuItem value={"movie-asc"}>Movies in Ascending</MenuItem>
-          <MenuItem value={"movie-desc"}>Movies in Descending</MenuItem>               
+          <MenuItem value={"movie-asc"}>Movies List(A-Z)</MenuItem>
+          <MenuItem value={"movie-desc"}>Movies List(Z-A)</MenuItem>               
           </Select>
         </FormControl>               
 

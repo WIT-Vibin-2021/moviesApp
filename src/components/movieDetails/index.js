@@ -11,7 +11,7 @@ import NavigationIcon from "@material-ui/icons/Navigation";
 import Fab from "@material-ui/core/Fab";
 import Drawer from "@material-ui/core/Drawer";
 import MovieReviews from '../movieReviews'
-import { Language, MovieSharp, SignalCellular0Bar } from "@material-ui/icons";
+import { Language, MovieSharp } from "@material-ui/icons";
 import {Tooltip} from "@material-ui/core"
 import Popup from "../PopUp";
 import { getVideo } from "../../api/tmdb-api";

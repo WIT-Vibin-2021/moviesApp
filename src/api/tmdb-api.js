@@ -174,3 +174,27 @@
         //console.log(response.json())   
     };
     
+      // Movies Search by Critera List
+    export const getSearchMovies = (args) => {
+      // console.log(`genres=${args.queryKey[1].generid}`)
+      // console.log(`language=${args.queryKey[1].lang}`)
+      // console.log(`year=${args.queryKey[1].year}`)
+      // console.log(`sort_by=${args.queryKey[1].sort}`)
+      console.log(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&with_genres=${args.queryKey[1].generid}&language=${args.queryKey[1].lang}&year=${args.queryKey[1].year}&sort_by=$${args.queryKey[1].sort}&include_adult=false&include_video=false&page=1`)
+      return fetch(        
+        `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&with_genres=${args.queryKey[1].generid}&language=${args.queryKey[1].lang}&year=${args.queryKey[1].year}&sort_by=${args.queryKey[1].sort}&include_adult=false&include_video=false&page=1`
+        )
+        
+        
+      
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.json().message);
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        throw error
+    });
+    };
+  // Movies Search by Keywords

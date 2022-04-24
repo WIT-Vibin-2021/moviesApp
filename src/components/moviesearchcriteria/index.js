@@ -17,7 +17,7 @@ import SortIcon from "@material-ui/icons/Sort"
 import Fab from "@material-ui/core/Fab";  
 import { Search } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
-import { useHistory,Link } from "react-router-dom";
+import { useHistory,Link, } from "react-router-dom";
 
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -50,21 +50,32 @@ const useStyles = makeStyles((theme) => ({
     face :"Arial",borderBottom: "2px", 
     minWidth: 220,size:"20px", height:"30px", border:"1px", backgroundColor: "rgb(232,232,232)", },
 }));
-
 export default function MoviesSearchCriteria(props) {
   const  history = useHistory()
-const routeChange = () =>{ 
-  var name = document.getElementById("searchText").value
-  let path = `/search/` +name; 
-  history.push(path);
-}
-const [drawerSearchOpen, setDrawerSearchOpen] = useState(false);
-
+  const [drawerSearchOpen, setDrawerSearchOpen] = useState(false);
+  const [genrevalue, setGenreValue] = useState([]);
+  const [Langvalue, setLangValue] = useState([]);
+  const [sorttypevalue, setSortTypeValue] = useState([]);
+  const [sortordvalue, setSortOrdValue] = useState([]);
   const classes = useStyles();
   const { data, error, isLoading, isError } = useQuery("genres", getGenres);
   const [datalanguages, setLanguages] = useState([]);
+  const [datagenres, setGeneres] = useState([]);
   const [sortOptions, setSortOptions] = useState([]);
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState("");
+
+  
+  const routeChange = () =>{ 
+    var searchQuery = document.getElementById("searchText").value
+    var searchYear = document.getElementById("yearSelect").value
+    searchYear = (searchYear>0)?searchYear:"''"
+    var searchGenre = (genrevalue>0)? genrevalue:"''"
+    var searchLang = (Langvalue.length>0) ?Langvalue:"''"
+    var searchType = (sorttypevalue.length>0)?sorttypevalue:"''"
+    var searchSort = (sorttypevalue.length>0)? ((sortordvalue.length>0)?sorttypevalue+'.'+sortordvalue:"''"):"''"    
+     let path = `/searchcriteria/`+searchGenre+`/`+ searchLang +`/`+ searchYear +`/`+ searchSort; 
+     history.push(path);
+  }
 
   // API Call for list of language
   useEffect(() => {
@@ -93,15 +104,16 @@ const [drawerSearchOpen, setDrawerSearchOpen] = useState(false);
   //--- Set the dropdownliat -----------------
 
   const handleTextChange = (e, props) => {
-    handleUserInput(e, "title", e.target.value);
+    //handleUserInput(e, "title", e.target.value);
   };
 
   const handleGenreChange = (e) => {
+    
     handleUserInput(e, "genre", e.target.value);
   };
   
   const handleLanguageChange = (e) => {
-    handleUserInput(e, "language", e.target.value);
+    //handleUserInput(e, "language", e.target.value);
   };
 
   //Sorting Handling
@@ -121,28 +133,31 @@ const [drawerSearchOpen, setDrawerSearchOpen] = useState(false);
     <Card className={classes.root} variant="outlined">
       <CardContent>
 
-        {/* --------Serach--------- */}
-        <FormControl className={classes.formControl}>
-          <Typography variant="h5" component="h1">
+        <Typography variant="h5" component="h1">
             <FilterListIcon fontSize="small" />
           Search Options
           </Typography>
+        {/* --------Serach--------- */}
+        {/* <FormControl className={classes.formControl}>          
           <TextField          
             className={classes.formControl}
             id="searchText"
             label="Search movie name"
             type="search"                            
           />    
-        </FormControl>
+        </FormControl> */}
 
         {/* -----------------Genres-------- */}
         <FormControl className={classes.formControl}>
-          <InputLabel id="genre-label">Genre</InputLabel>
+          <InputLabel id="genrelbl">Genre</InputLabel>
           <Select            
-            labelId="genre-label"
-            id="genre-select"
+            labelId="genrelbl"
+            id="genre"
             value={props.genreFilter}
-            onChange={handleGenreChange}
+            onChange={event => {
+              setGenreValue(event.target.value);
+            }}
+            
           >
             {genres.map((genre) => {
               return (
@@ -161,7 +176,9 @@ const [drawerSearchOpen, setDrawerSearchOpen] = useState(false);
             labelId="language-label"
             id="language-select"
             value={props.languageFilter}
-            onChange={handleLanguageChange}
+            onChange={event => {
+              setLangValue(event.target.value);
+            }}
           >
             {datalanguages.map((language) => {
               return (
@@ -176,7 +193,7 @@ const [drawerSearchOpen, setDrawerSearchOpen] = useState(false);
           {/* ------------ Year-------- */}
           <FormControl className={classes.formControl}>
           <font face="Arial" size="20px">Year of release</font>          
-          <DatePicker className={classes.datepicker}
+          <DatePicker className={classes.datepicker} id="yearSelect"
             selected={startDate}
             onChange={(date) => setStartDate(date)}
             showYearPicker
@@ -190,16 +207,26 @@ const [drawerSearchOpen, setDrawerSearchOpen] = useState(false);
         <font face="Arial" size="20px"><legend >Sort result by</legend></font>
         <FormControl>                
           {/* ------------ Type--------- */}
-          <Select width="100%" labelId="sort-label" id="sort-select" value={props.sortingValue} onChange={handleSortChange}>                      
-            <MenuItem value={"movie-pop"}>Popularity</MenuItem>
-            <MenuItem value={"movie-rate"}>Rating</MenuItem>
-            <MenuItem value={"movie-relDt"}>Release Date</MenuItem>
-            <MenuItem value={"movie-Tit"}>Title</MenuItem>
+          <Select width="100%" labelId="sort-label" id="sort-select" value={props.sortingValue} 
+          onChange={event => {
+            setSortTypeValue(event.target.value);
+          }}>                      
+          
+            <MenuItem value={"popularity"}>Popularity</MenuItem>
+            <MenuItem value={"vote_average"}>Rating</MenuItem>
+            <MenuItem value={"release_date"}>Release Date</MenuItem>
+            <MenuItem value={"original_title"}>Original Title</MenuItem>
           </Select> 
           {/* ------------ Order--------- */}
           <RadioGroup row  name="position" defaultValue="top">        
-            <FormControlLabel id="rdAscending" value="Ascending" control={<Radio />} label="Ascending" />
-            <FormControlLabel id="rdDescending" value="Descending" control={<Radio />} label="Descending" />
+            <FormControlLabel id="rdAscending" value="asc" control={<Radio />} label="Ascending" 
+            onChange={event => {
+            setSortOrdValue(event.target.value);
+          }}/>
+            <FormControlLabel id="rdDescending" value="desc" control={<Radio />} label="Descending" 
+            onChange={event => {
+              setSortOrdValue(event.target.value);
+            }}/>
           </RadioGroup>            
         </FormControl> 
         </fieldset>         

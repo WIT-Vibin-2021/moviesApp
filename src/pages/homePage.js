@@ -91,21 +91,7 @@ const HomePage = (props) => {
   // console.log(page)
   // console.log("setPage")  
   return (    
-    <>
-    <div align="center">
-        <span>Current Page: {page}</span>
-        </div>
-        <div>
-        {/* Pagination - Orignal - < 1 2 3 4...500 > */}
-        <Pagination
-          // Limited to 500, TMDB API will allow max of 500 pages other than data.totalpages
-          count={500} 
-          variant="outlined" color="secondary"   shape="rounded" 
-          className='pagination'
-          page={page}
-          onChange={handlePaginationChange}
-        />
-        </div>
+    <>      
       <PageTemplate
         title="Discover Movies"
         movies={displayedMovies}
@@ -148,7 +134,7 @@ const HomePage = (props) => {
           className='pagination'
           page={page}
           onChange={handlePaginationChange}
-        />
+        />        
         </div>
     </>
   );
