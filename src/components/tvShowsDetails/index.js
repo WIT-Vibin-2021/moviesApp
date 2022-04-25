@@ -7,12 +7,14 @@ import StarRate from "@material-ui/icons/StarRate";
 import TheatersIcon from '@material-ui/icons/Theaters';
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import NavigationIcon from "@material-ui/icons/Navigation";
+import DateIcon from '@material-ui/icons/DateRangeOutlined';
+import TvIcon from '@material-ui/icons/Tv';
 import Fab from "@material-ui/core/Fab";
 import Drawer from "@material-ui/core/Drawer";
-import MovieReviews from '../movieReviews'
+// import MovieReviews from '../movieReviews'
 import { Language, MovieSharp } from "@material-ui/icons";
 import {Tooltip} from "@material-ui/core"
+import NumberIcon from '@material-ui/icons/ConfirmationNumber';
 import Popup from "../PopUp";
 import { getVideo } from "../../api/tmdb-api";
 
@@ -47,68 +49,86 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MovieDetails = ( {movie}) => {
+const TvShowsDetails = ( {tvshows}) => {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);   
   const [buttonPopUp, setButtonPopUp] = useState(false);
-  const [moviePopUp, setmoviePopUp] = useState("");
+  const [tvshowsPopUp, settvshowsPopUp] = useState("");
   const [videoData, setvideoData] = useState([]);
-  useEffect(() => {
-    getVideo(movie.id).then((videoData) => {
-      setvideoData(videoData);
-    });    
-  }, []);
+//   useEffect(() => {
+//     getVideo(tvshows.id).then((videoData) => {
+//       setvideoData(videoData);
+//     });    
+//   }, []);
   return (
     <>    
       <Typography variant="h5" component="h3" >
-        Overview        
+        Overview 
       </Typography>      
       <Typography variant="h6" component="p">
-        {movie.overview}
+        {tvshows.overview}
       </Typography>
       <div className={classes.chipRoot}>
       <Paper component="ul" className={classes.chipSet} elevation={0} >
         <li>
           <Chip label="Genres" className={classes.chipLabel} color="primary" />          
         </li>
-        {movie.genres.map((g) => (
+        {tvshows.genres.map((g) => (
+          <li key={g.name}> 
+            <Chip label={g.name} className={classes.chip} />
+          </li>
+        ))}
+        <li>
+          <Chip label="Network" className={classes.chipLabel} color="primary" />          
+        </li>
+        {tvshows.networks.map((g) => (
           <li key={g.name}> 
             <Chip label={g.name} className={classes.chip} />
           </li>
         ))}
       </Paper>      
+      <Paper component="ul" className={classes.chipSet} elevation={0} >        
+        <Chip icon={<TvIcon />} label={`${tvshows.status}`}/>
+        <Chip icon={<StarRate />} label={`${tvshows.vote_average} (${tvshows.vote_count})`}/>              
+      </Paper>    
       <Paper component="ul" className={classes.chipSet} elevation={0} >
-        <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
-        <Chip
-          icon={<MonetizationIcon />}
-          label={`${movie.revenue.toLocaleString()}`}
-        />
-        <Chip
-          icon={<StarRate />}
-          label={`${movie.vote_average} (${movie.vote_count})`}
-        />
-        <Chip icon={<TheatersIcon />}label={`Released: ${movie.release_date}`} />        
-      </Paper>  <br></br>
+        <li>
+          <Chip label="Season \ AirDate" className={classes.chipLabel} color="primary" />          
+        </li>
+        {tvshows.seasons.map((g) => (
+          <li key={g.air_date}>
+            <Chip label={g.name+' \\ '+g.air_date} className={classes.chip} />            
+          </li>          
+        ))}<br/>      
+      </Paper>
+      <Paper component="ul" className={classes.chipSet} elevation={0} > 
+      <Chip icon={<TheatersIcon />} label={`No.of Seasons ${tvshows.number_of_seasons}`}/>
+      <Chip icon={<DateIcon />}label={`First Air Date: ${tvshows.first_air_date}`} />        
+      <Chip icon={<TheatersIcon />}label={`Last Air Date: ${tvshows.last_air_date}`} />        
+      <Chip icon={<NumberIcon />} label={`No. of Episodes ${tvshows.number_of_episodes}`} />
+      </Paper>  
+      <br></br>
+
       <Paper component="ul" className={classes.chipSet} elevation={0} >      
-        <Tooltip  title={<h3 style={{ color: "white" }}>{movie.homepage}</h3>}>        
-        <Chip icon={<Language />}label="Movie Home Page" color="primary" variant="outlined" component="a" href={movie.homepage} clickable />  
+        <Tooltip  title={<h3 style={{ color: "white" }}>{tvshows.homepage}</h3>}>        
+        <Chip icon={<Language />}label="Tv Shows Home Page" color="primary" variant="outlined" component="a" href={tvshows.homepage} clickable />  
         </Tooltip>
       </Paper>
-      <Paper component="ul" className={classes.chipSet} elevation={0} >             
+      {/* <Paper component="ul" className={classes.chipSet} elevation={0} >             
           <Chip icon={<MovieSharp />}label="Similar Movies (Keywords & Genres)" 
           color="primary" variant="outlined"  component="a" href={`/similar/${movie.id}`} clickable />           
-      </Paper>
+      </Paper> */}
 {/* ------------------------------------------------------------------------------- */}
       <Paper component="ul" className={classes.chipSet} elevation={0} >             
           <Chip icon={<MovieSharp />}label="Video" 
-          onClick={()=>{setButtonPopUp(true); setmoviePopUp(videoData.results[0].key)}}
+          onClick={()=>{setButtonPopUp(true); settvshowsPopUp(videoData.results[0].key)}}
           color="primary" variant="outlined" clickable />           
       </Paper>
-      <Popup trigger={buttonPopUp} setTrigger={setButtonPopUp} trigger2={moviePopUp}>           
+      <Popup trigger={buttonPopUp} setTrigger={setButtonPopUp} trigger2={tvshowsPopUp}>           
       </Popup>
       </div>            
 {/* -------------------------------------------------------------------------------- */}            
-      <Fab    
+      {/* <Fab    
         color="secondary"
         variant="extended"
         onClick={() =>setDrawerOpen(true)}
@@ -119,8 +139,8 @@ const MovieDetails = ( {movie}) => {
       </Fab>
       <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <MovieReviews movie={movie} />
-      </Drawer>
+      </Drawer> */}
     </>
   );
 };
-export default  MovieDetails ; 
+export default  TvShowsDetails ; 

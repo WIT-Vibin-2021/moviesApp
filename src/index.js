@@ -15,6 +15,10 @@ import MoviesSearchPage from './pages/moviesSearchPage'
 import SimilarMovies from './pages/similarMovies'
 import MoviesCriteria from './pages/moviesCriteriaSearchPage'
 
+import tvShowsDetailPage from "./pages/tvShowsDetailsPage";
+import popularTvShowsPage from './pages/popularTvShowsPage'
+import PopularTvShows from "./pages/popularTvShowsPage";
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -32,11 +36,15 @@ const App = () => {
         <SiteHeader />
         <MoviesContextProvider>
         
-        <Switch>
-          <Route path="/searchcriteria/:generid/:lang/:year/:sort" component={MoviesCriteria} />
-          
-          <Route path="/similar/:query" component={SimilarMovies} />
+          <Switch>
+
+          <Route exact path="/tvshows/popular" component={PopularTvShows} />
+          <Route path="/tvshows/:id" component={tvShowsDetailPage} /> 
+
+          <Route path="/searchcriteria/:generid/:lang/:year/:sort" component={MoviesCriteria} />          
           <Route path="/search/:query" component={MoviesSearchPage} />
+
+          <Route path="/similar/:query" component={SimilarMovies} />          
           <Route path="/movies/toprated" component={TopRatedMoviesPage} />
           <Route exact path="/reviews/form" component={AddMovieReviewPage} />
           <Route path="/movies/upcoming" component={UpcomingMoviesPage} />
@@ -45,7 +53,7 @@ const App = () => {
           <Route path="/movies/:id" component={MoviePage} />
           <Route exact path="/" component={HomePage} />
           <Redirect from="*" to="/" />
-        </Switch>
+          </Switch>
       
         </MoviesContextProvider>
       </BrowserRouter>
