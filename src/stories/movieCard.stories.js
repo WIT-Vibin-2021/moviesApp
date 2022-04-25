@@ -6,7 +6,7 @@ import MoviesContextProvider from "../contexts/moviesContext";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  title: "Home Page/MovieCard",
+  title: "Movie Page/MovieCard",
   component: MovieCard,
   decorators: [
     (Story) => <MemoryRouter initialEntries={["/"]}>{Story()}</MemoryRouter>,

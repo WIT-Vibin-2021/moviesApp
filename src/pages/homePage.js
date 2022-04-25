@@ -50,7 +50,7 @@ const HomePage = (props) => {
   //Pagination - Open
   //commented for pagination // const { data, error, isLoading, isError } = useQuery("discover", getMovies);  
   const [page, setPage] = React.useState(1);  
-  const { data, error, isLoading, isError, isFetching, isPreviousData } = useQuery(["pages", page ],getMoviePages);  
+  const { data, error, isLoading, isError, isFetching, isPreviousData } = useQuery(["pages", {Pages:page} ],getMoviePages);  
 
   function handlePaginationChange(e, value) {
     setPage(value);    

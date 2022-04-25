@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-import Fab from "@material-ui/core/Fab";
-import FilterCard from "../filterMoviesCard";
-import Drawer from "@material-ui/core/Drawer";
 import { makeStyles } from "@material-ui/core/styles";
-import FilterListIcon from "@material-ui/icons/FilterList"
-import SortIcon from "@material-ui/icons/Sort"
-import { CenterFocusStrong } from "@material-ui/icons";
-import { useParams } from "react-router-dom";
-import { useQuery } from "react-query";
-import { getVideo2 } from "../../api/tmdb-api";
 import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme) => ({

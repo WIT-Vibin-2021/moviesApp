@@ -18,6 +18,7 @@ import MoviesCriteria from './pages/moviesCriteriaSearchPage'
 import tvShowsDetailPage from "./pages/tvShowsDetailsPage";
 import popularTvShowsPage from './pages/popularTvShowsPage'
 import PopularTvShows from "./pages/popularTvShowsPage";
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -57,7 +58,7 @@ const App = () => {
       
         </MoviesContextProvider>
       </BrowserRouter>
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 };
