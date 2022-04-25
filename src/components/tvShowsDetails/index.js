@@ -16,7 +16,7 @@ import { Language, MovieSharp } from "@material-ui/icons";
 import {Tooltip} from "@material-ui/core"
 import NumberIcon from '@material-ui/icons/ConfirmationNumber';
 import Popup from "../PopUp";
-import { getVideo } from "../../api/tmdb-api";
+ import { getTvVideo } from "../../api/tmdb-api";
 
 const useStyles = makeStyles((theme) => ({
   chipRoot: {
@@ -55,11 +55,11 @@ const TvShowsDetails = ( {tvshows}) => {
   const [buttonPopUp, setButtonPopUp] = useState(false);
   const [tvshowsPopUp, settvshowsPopUp] = useState("");
   const [videoData, setvideoData] = useState([]);
-//   useEffect(() => {
-//     getVideo(tvshows.id).then((videoData) => {
-//       setvideoData(videoData);
-//     });    
-//   }, []);
+  useEffect(() => {
+    getTvVideo(tvshows.id).then((videoData) => {
+      setvideoData(videoData);
+    });    
+  }, []);
   return (
     <>    
       <Typography variant="h5" component="h3" >
@@ -109,15 +109,11 @@ const TvShowsDetails = ( {tvshows}) => {
       </Paper>  
       <br></br>
 
-      <Paper component="ul" className={classes.chipSet} elevation={0} >      
+      <Paper component="ul" className={classes.chipSet} elevation={0}  >      
         <Tooltip  title={<h3 style={{ color: "white" }}>{tvshows.homepage}</h3>}>        
         <Chip icon={<Language />}label="Tv Shows Home Page" color="primary" variant="outlined" component="a" href={tvshows.homepage} clickable />  
         </Tooltip>
       </Paper>
-      {/* <Paper component="ul" className={classes.chipSet} elevation={0} >             
-          <Chip icon={<MovieSharp />}label="Similar Movies (Keywords & Genres)" 
-          color="primary" variant="outlined"  component="a" href={`/similar/${movie.id}`} clickable />           
-      </Paper> */}
 {/* ------------------------------------------------------------------------------- */}
       <Paper component="ul" className={classes.chipSet} elevation={0} >             
           <Chip icon={<MovieSharp />}label="Video" 

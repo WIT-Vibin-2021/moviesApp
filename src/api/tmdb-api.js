@@ -1,17 +1,3 @@
-  // export const getMovies = () => {
-  //   return fetch(
-  //     `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
-  //   ).then((response) => {
-  //     if (!response.ok) {
-  //       throw new Error(response.json().message);
-  //     }
-  //     return response.json();
-  //   })
-  //   .catch((error) => {
-  //     throw error
-  //   });
-  // };
-
   //Pagination - Open
   export const getMoviePages = (args) => {      
     return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${args.queryKey[1]}`)    
@@ -163,7 +149,6 @@
      });
     };
   
-
     export const getVideo = (movieId) => {
       console.log("TMDB API" + "http://api.themoviedb.org/3/movie/"+movieId+"/videos?api_key=" + process.env.REACT_APP_TMDB_KEY)
       return fetch(
@@ -228,18 +213,10 @@
    });
   };
 
-  // export const getTvShowsImages = ({ queryKey }) => {
-  //   const [, idPart] = queryKey;
-  //   const { id } = idPart;
-  //   return fetch(
-  //     `https://api.themoviedb.org/3/tv/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`      
-  //   ).then( (response) => {
-  //     if (!response.ok) {
-  //       throw new Error(response.json().message);
-  //     }
-  //     return response.json();
-  //   })
-  //   .catch((error) => {
-  //     throw error
-  //  });
-  // };
+  export const getTvVideo = (tvId) => {    
+    return fetch(      
+      "https://api.themoviedb.org/3/tv/"+tvId+"/videos?api_key=" + process.env.REACT_APP_TMDB_KEY +"&language=en-US"       
+    )
+      .then((response) => response.json())
+      .then((json) => json);      
+  };
