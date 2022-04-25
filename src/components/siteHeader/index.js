@@ -40,6 +40,7 @@ const SiteHeader = () => {
   const classes = useStyles();
   const  history = useHistory()
   const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorTVEl, setAnchorTVEl] = useState(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -62,15 +63,25 @@ const SiteHeader = () => {
     }
   }
 
+  function handleTVClick(event) {
+    if (anchorTVEl !== event.currentTarget) {
+      setAnchorTVEl(event.currentTarget);
+    }
+  }
+
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleLeave = (event) => {
-    setAnchorEl(null);
-  };
+
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const handleTVClose = () => {
+    setAnchorTVEl(null);
+  };
+
+
 
 const routeChange = () =>{ 
   var name = document.getElementById("search").value
@@ -139,35 +150,51 @@ const handleKeyDown = (e) => {
                 >
                   <b>Home</b>
                 </Button>
+
+
                 <Button  color="inherit"
                   aria-owns={anchorEl ? "simple-menu" : undefined}
                   aria-haspopup="true"
                   onClick={handleClick}
                   onMouseOver={handleClick}
                 >
-                 <b> Movies</b>
+                <b> Movies</b>
                 </Button>                
-                    <Menu   
-                      disableScrollLock={true}
-                      id="simple-menu"
-                      anchorEl={anchorEl}
-                      open={Boolean(anchorEl)}
-                      onClose={handleClose}
-                      MenuListProps={{ onMouseLeave: handleClose }}
-                    >
-                      <MenuItem onClick={() => handleMenuSelect( "/movies/upcoming")}>Upcoming</MenuItem>
-                      <MenuItem onClick={() => handleMenuSelect( "/movies/favourites")}>Favorites</MenuItem>
-                      <MenuItem onClick={() => handleMenuSelect( "/movies/toprated")}>Top-Rated</MenuItem>                                 
-                    </Menu> 
-                <Button  color="inherit"
-                  aria-owns={anchorEl ? "simple-menu" : undefined}
-                  aria-haspopup="true"
-                  // onClick={handleClick}
-                  // onMouseOver={handleClick}
+                <Menu   
+                  disableScrollLock={true}
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                  MenuListProps={{ onMouseLeave: handleClose }}
                 >
-                 <b> People</b>
-                </Button>                   
-               {/* ------------------------  */}
+                  <MenuItem onClick={() => handleMenuSelect( "/movies/upcoming")}>Upcoming</MenuItem>
+                  <MenuItem onClick={() => handleMenuSelect( "/movies/favourites")}>Favorites</MenuItem>
+                  <MenuItem onClick={() => handleMenuSelect( "/movies/toprated")}>Top-Rated</MenuItem>                                 
+                </Menu> 
+                
+                {/* ------------------------  */}
+                <Button  color="inherit"
+                  aria-owns={anchorEl ? "simple-menu2" : undefined}
+                  aria-haspopup="true"
+                  onClick={handleTVClick}
+                  onMouseOver={handleTVClick}
+                >
+                <b> TV Shows</b>
+                </Button>            
+                <Menu   
+                  disableScrollLock={true}
+                  id="simple-menu2"
+                  anchorEl={anchorTVEl}
+                  open={Boolean(anchorTVEl)}
+                  onClose={handleTVClose}
+                  MenuListProps={{ onMouseLeave: handleTVClose }}                  
+                >
+                  <MenuItem onClick={() => handleMenuSelect( "/tvshows/popular")}>Popular</MenuItem>                                                 
+                </Menu>                 
+                {/* ------------------------  */}
+
+
               </div>
             </>
           )}

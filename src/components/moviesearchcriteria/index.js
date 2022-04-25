@@ -65,8 +65,7 @@ export default function MoviesSearchCriteria(props) {
   const [startDate, setStartDate] = useState("");
 
   
-  const routeChange = () =>{ 
-    var searchQuery = document.getElementById("searchText").value
+  const routeChange = () =>{     
     var searchYear = document.getElementById("yearSelect").value
     searchYear = (searchYear>0)?searchYear:"''"
     var searchGenre = (genrevalue>0)? genrevalue:"''"

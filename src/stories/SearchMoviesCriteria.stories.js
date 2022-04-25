@@ -26,6 +26,6 @@ export default {
 };
 
 export const Basic = () => {
-  return <SearchMoviesCriteria onUserInput={action("filter input")} />;
+  return <SearchMoviesCriteria onUserInput={action("search input")} />;
 };
 Basic.storyName = "Default";
