@@ -197,7 +197,7 @@ export default function MoviesSearchCriteria(props) {
             onChange={(date) => setStartDate(date)}
             showYearPicker
             dateFormat="yyyy"
-            yearItemNumber={9}
+            yearItemNumber={10}
           />          
         </FormControl><div className={classes.line}></div>  <br></br>  
 

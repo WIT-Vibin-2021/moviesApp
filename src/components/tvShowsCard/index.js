@@ -36,13 +36,6 @@ export default function TvShowsCard({ tvshows, action }) {
   const [moviePopUp, setmoviePopUp] = useState("");
   const [videoData, setvideoData] = useState([]); 
   const classes = useStyles();
-//   const { favourites } = useContext(MoviesContext);
-
-//   if (favourites.find((id) => id === movie.id)) {
-//     movie.favourite = true;
-//   } else {
-//     movie.favourite = false
-//   }
   useEffect(() => {
     getTvVideo(tvshows.id).then((videoData) => {
       setvideoData(videoData);
@@ -52,13 +45,6 @@ export default function TvShowsCard({ tvshows, action }) {
     <Card className={classes.card}>
       <CardHeader
       className={classes.header}
-    //   avatar={
-    //     movie.favourite ? (
-    //       <Avatar className={classes.avatar}>
-    //         <FavoriteIcon />
-    //       </Avatar>
-    //     ) : null
-    //   }
       title={
         <Tooltip  title={<h2 style={{ color: "white" }}>{tvshows.name}</h2>} >
           <Typography className={classes.text} variant="h5" component="p">

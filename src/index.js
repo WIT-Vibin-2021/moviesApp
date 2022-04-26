@@ -18,6 +18,7 @@ import MoviesCriteria from './pages/moviesCriteriaSearchPage'
 import tvShowsDetailPage from "./pages/tvShowsDetailsPage";
 import popularTvShowsPage from './pages/popularTvShowsPage'
 import PopularTvShows from "./pages/popularTvShowsPage";
+import FantasyMoviePage from "./pages/fantasyMoviePage";
 import { ReactQueryDevtools } from 'react-query/devtools'
 import 'bootstrap/dist/css/bootstrap.min.css';   
 
@@ -39,7 +40,7 @@ const App = () => {
         <MoviesContextProvider>
         
           <Switch>
-
+          <Route exact path="/fantasymovies/" component={FantasyMoviePage} />
           <Route exact path="/tvshows/popular" component={PopularTvShows} />
           <Route path="/tvshows/:id" component={tvShowsDetailPage} /> 
 

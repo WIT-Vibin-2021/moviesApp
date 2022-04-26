@@ -171,6 +171,7 @@ const handleKeyDown = (e) => {
                   <MenuItem onClick={() => handleMenuSelect( "/movies/upcoming")}>Upcoming</MenuItem>
                   <MenuItem onClick={() => handleMenuSelect( "/movies/favourites")}>Favorites</MenuItem>
                   <MenuItem onClick={() => handleMenuSelect( "/movies/toprated")}>Top-Rated</MenuItem>                                 
+                  <MenuItem onClick={() => handleMenuSelect( "/fantasymovies")}>Fantasy Movie Making</MenuItem>
                 </Menu> 
                 
                 {/* ------------------------  */}
