@@ -19,6 +19,7 @@ import tvShowsDetailPage from "./pages/tvShowsDetailsPage";
 import popularTvShowsPage from './pages/popularTvShowsPage'
 import PopularTvShows from "./pages/popularTvShowsPage";
 import { ReactQueryDevtools } from 'react-query/devtools'
+import 'bootstrap/dist/css/bootstrap.min.css';   
 
 const queryClient = new QueryClient({
   defaultOptions: {

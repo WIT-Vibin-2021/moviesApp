@@ -16,6 +16,8 @@ import {Tooltip} from "@material-ui/core"
 import Popup from "../PopUp";
 import { getVideo } from "../../api/tmdb-api";
 
+import { Modal} from 'react-bootstrap'; 
+
 const useStyles = makeStyles((theme) => ({
   chipRoot: {
     display: "flex",
@@ -45,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
     top: theme.spacing(10),
     right: theme.spacing(2),
   },
+  popup: {    
+    top:"20%",    
+},
 }));
 
 const MovieDetails = ( {movie}) => {
@@ -58,6 +63,7 @@ const MovieDetails = ( {movie}) => {
       setvideoData(videoData);
     });    
   }, []);
+  
   return (
     <>    
       <Typography variant="h5" component="h3" >
@@ -101,11 +107,24 @@ const MovieDetails = ( {movie}) => {
 {/* ------------------------------------------------------------------------------- */}
       <Paper component="ul" className={classes.chipSet} elevation={0} >             
           <Chip icon={<MovieSharp />}label="Video" 
-          onClick={()=>{setButtonPopUp(true); setmoviePopUp(videoData.results[0].key)}}
+          onClick={()=>{setButtonPopUp(true); setmoviePopUp(videoData.results[0].key)}}          
           color="primary" variant="outlined" clickable />           
       </Paper>
-      <Popup trigger={buttonPopUp} setTrigger={setButtonPopUp} trigger2={moviePopUp}>           
-      </Popup>
+      {/* <Popup trigger={buttonPopUp} setTrigger={setButtonPopUp} trigger2={moviePopUp}>           
+      </Popup> */}
+      <div>                           
+        <Modal show={buttonPopUp} onHide={()=>setButtonPopUp(false)} className={classes.popup}>  
+          <Modal.Header closeButton>Video related to the movie</Modal.Header>  
+          <Modal.Body>
+                <div >                                
+                    <iframe width="465" height="315" src={`https://www.youtube.com/embed/${moviePopUp}`}title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    {/* <br/><button onClick={()=>props.setTrigger(false)}>Close</button><br/>                                */}
+                </div>                
+            </Modal.Body>   
+        </Modal>  
+      </div>
+
+
       </div>            
 {/* -------------------------------------------------------------------------------- */}            
       <Fab    
