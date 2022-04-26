@@ -17,6 +17,7 @@ import {Tooltip} from "@material-ui/core"
 import NumberIcon from '@material-ui/icons/ConfirmationNumber';
 import Popup from "../PopUp";
  import { getTvVideo } from "../../api/tmdb-api";
+ import { Modal} from 'react-bootstrap'; 
 
 const useStyles = makeStyles((theme) => ({
   chipRoot: {
@@ -47,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
     top: theme.spacing(10),
     right: theme.spacing(2),
   },
+  popup: {    
+    top:"20%",    
+},
 }));
 
 const TvShowsDetails = ( {tvshows}) => {
@@ -120,8 +124,21 @@ const TvShowsDetails = ( {tvshows}) => {
           onClick={()=>{setButtonPopUp(true); settvshowsPopUp(videoData.results[0].key)}}
           color="primary" variant="outlined" clickable />           
       </Paper>
-      <Popup trigger={buttonPopUp} setTrigger={setButtonPopUp} trigger2={tvshowsPopUp}>           
+      {/* <Popup trigger={buttonPopUp} setTrigger={setButtonPopUp} trigger2={tvshowsPopUp}>           
       </Popup>
+       */}
+
+<div>                           
+        <Modal show={buttonPopUp} onHide={()=>setButtonPopUp(false)} className={classes.popup}>  
+          <Modal.Header closeButton>Video related to the show</Modal.Header>  
+          <Modal.Body>
+                <div >                                
+                    <iframe width="465" height="315" src={`https://www.youtube.com/embed/${tvshowsPopUp}`}title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    {/* <br/><button onClick={()=>props.setTrigger(false)}>Close</button><br/>                                */}
+                </div>                
+            </Modal.Body>   
+        </Modal>  
+      </div>
       </div>            
 {/* -------------------------------------------------------------------------------- */}            
       {/* <Fab    

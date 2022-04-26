@@ -1,4 +1,4 @@
-import React, { useContext  } from "react";
+import React, { useContext,useEffect , useState  } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -16,6 +16,8 @@ import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import { MoviesContext } from "../../contexts/moviesContext";
 import {Tooltip} from "@material-ui/core"
+import { getTvVideo } from "../../api/tmdb-api";
+import { Modal} from 'react-bootstrap'; 
 
 const useStyles = makeStyles({
   card: { maxWidth: 345 },
@@ -24,9 +26,15 @@ const useStyles = makeStyles({
   avatar: {
     backgroundColor: "rgb(255, 0, 0)",
   },
+  popup: {    
+    top:"20%",    
+},
 });
 
 export default function TvShowsCard({ tvshows, action }) {  
+  const [buttonPopUp, setButtonPopUp] = useState(false);
+  const [moviePopUp, setmoviePopUp] = useState("");
+  const [videoData, setvideoData] = useState([]); 
   const classes = useStyles();
 //   const { favourites } = useContext(MoviesContext);
 
@@ -35,7 +43,11 @@ export default function TvShowsCard({ tvshows, action }) {
 //   } else {
 //     movie.favourite = false
 //   }
-
+  useEffect(() => {
+    getTvVideo(tvshows.id).then((videoData) => {
+      setvideoData(videoData);
+    });    
+  }, []);
   return (
     <Card className={classes.card}>
       <CardHeader
@@ -54,8 +66,7 @@ export default function TvShowsCard({ tvshows, action }) {
           </Typography>
         </Tooltip>
       }      
-      />    
-      <Tooltip  title={<h2 style={{ color: "white" }}>{tvshows.name}</h2>} >
+      />          
       <CardMedia 
         className={classes.media}
         image={
@@ -63,8 +74,9 @@ export default function TvShowsCard({ tvshows, action }) {
             ? `https://image.tmdb.org/t/p/w500/${tvshows.poster_path}`
             : `${process.env.PUBLIC_URL}/assets/film-poster-placeholder.png`
         }
+        onClick={()=>{setButtonPopUp(true); setmoviePopUp(videoData.results[0].key)}}
       />
-      </Tooltip>
+      
       <CardContent>
         <Grid container>
           <Grid item xs={6}>
@@ -89,6 +101,17 @@ export default function TvShowsCard({ tvshows, action }) {
           </Button>
         </Link>
       </CardActions>
+      <div>                           
+        <Modal show={buttonPopUp} onHide={()=>setButtonPopUp(false)} className={classes.popup}>  
+          <Modal.Header closeButton>Video related to the show</Modal.Header>  
+          <Modal.Body>
+                <div >                                
+                    <iframe width="465" height="315" src={`https://www.youtube.com/embed/${moviePopUp}`}title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    {/* <br/><button onClick={()=>props.setTrigger(false)}>Close</button><br/>                                */}
+                </div>                
+            </Modal.Body>   
+        </Modal>  
+      </div>
     </Card>
   );
 }
