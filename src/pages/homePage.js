@@ -79,7 +79,7 @@ const HomePage = (props) => {
       case "genre":
         newFilters =  [filterValues[0], newf, filterValues[2]];
         break;      
-      //default: newFilters = []; break;
+      default: newFilters = []; break;
     }
     setFilterValues(newFilters);
   };

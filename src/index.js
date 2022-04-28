@@ -22,6 +22,7 @@ import FantasyMoviePage from "./pages/fantasyMoviePage";
 import { ReactQueryDevtools } from 'react-query/devtools'
 import 'bootstrap/dist/css/bootstrap.min.css';   
 import AuthContextProvider from "./contexts/authContext";
+import PrivateRoute from './components/privateRoute';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -43,7 +44,7 @@ const App = () => {
           <MoviesContextProvider>          
             <Switch>
             <Route exact path="/login/" component={loginPage} />
-            <Route exact path="/fantasymovies/" component={FantasyMoviePage} />
+            <PrivateRoute exact path="/fantasymovies/" component={FantasyMoviePage} />
             <Route exact path="/tvshows/popular" component={PopularTvShows} />
             <Route path="/tvshows/:id" component={tvShowsDetailPage} /> 
 
@@ -55,7 +56,7 @@ const App = () => {
             <Route exact path="/reviews/form" component={AddMovieReviewPage} />
             <Route path="/movies/upcoming" component={UpcomingMoviesPage} />
             <Route path="/reviews/:id" component={MovieReviewPage} />
-            <Route exact path="/movies/favourites" component={FavouriteMoviesPage} />
+            <PrivateRoute exact path="/movies/favourites" component={FavouriteMoviesPage} />
             <Route path="/movies/:id" component={MoviePage} />
             <Route exact path="/" component={HomePage} />
             <Redirect from="*" to="/" />
