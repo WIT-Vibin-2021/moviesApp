@@ -22,17 +22,28 @@ const useStyles = makeStyles((theme) => ({
   },   
 }));
 
-const LoginPage = props => {
+const SignUpPage = props => {
   const classes = useStyles();
   const context = useContext(AuthContext)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordAgain, setPasswordAgain] = useState("");
+  const [registered, setRegistered] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
-  const login = () => {
-    context.authenticate(email, password);
-  };
+  const register = () => {
+    if (password.length > 0 && password === passwordAgain) {
+      console.log("reg")
+      context.register(email, password, firstName, lastName);
+      setRegistered(true);
+    }
+  }
 
-//   const { from } = props.location.state || { from: { pathname: "/" } };
+   //const { from } = props.location.state || { from: { pathname: "/" } };
+   if (registered === true) {
+    return <Redirect to="./login" />;
+  }
   
   console.log(context)
 
@@ -47,35 +58,58 @@ const LoginPage = props => {
         <Typography variant="h5" component="h1"className={classes.formControl}>            
         Sign Up Details
         </Typography>      
-        <FormControl className={classes.formControl}>          
-          <TextField                      
-            id="firstName"
-            label="First Name"
-            type="Name"                            
-          />    <br></br>
-          <TextField                      
-            id="E-mail"
-            label="E-Mail"
-            type="email"                            
-          />   
-        </FormControl> 
         <FormControl className={classes.formControl}>  
         <TextField                      
-            id="LastName"
-            label="Last Name"
-            type="Name"                            
-          />           <br></br>
+            id="email"
+            value={email}
+            label="E-Mail"
+            type="email"
+            onChange={e => {
+              setEmail(e.target.value);
+            }} 
+            required                             
+          />     <br/>    
+        <TextField                      
+            id="firstName"
+            value={firstName}
+            label="First Name"
+            type="Name"  
+            onChange={e => {
+              setFirstName(e.target.value);
+            }} 
+            required                           
+          /><br/>
           <TextField                      
-            id="password"
-            label="Password"
-            type="password"                            
+            id="lastName" value={lastName}
+            label="Last Name"
+            type="Name"
+            onChange={e => {
+              setLastName(e.target.value);
+            }} 
+            required                             
+          />  
+           </FormControl>
+        <FormControl className={classes.formControl}>                             
+          <TextField                      
+            id="password" type="password" value={password} onChange={e => {
+              setPassword(e.target.value);
+            }} required 
+            label="Password"            
+          /> <br/>
+          <TextField                      
+            id="passwordagain" type="password" value={passwordAgain} onChange={e => {
+              setPasswordAgain(e.target.value);
+            }} required
+            label="Re- Enter Password"            
           />    
           
         </FormControl>             
         <br/>     
         <Fab className={classes.formbutton}
         color="secondary"
-        variant="extended">        
+        variant="extended"
+        onClick={register}
+        >        
           Sign Up
         </Fab>
       </CardContent>   
@@ -85,4 +119,4 @@ const LoginPage = props => {
   );
 };
 
-export default LoginPage;
+export default SignUpPage;

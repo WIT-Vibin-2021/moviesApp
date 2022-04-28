@@ -10,7 +10,8 @@ import { AuthContext } from "../contexts/authContext";
 const FantasyMovies= (props) => { 
   const useStyles = makeStyles((theme) => ({
     root: {      
-      justifyContent: "space-around",      
+      justifyContent: "space-around",   
+      backgroundColor: "rgb(232,232,232)",    
     },    
   }));
   const classes = useStyles();
