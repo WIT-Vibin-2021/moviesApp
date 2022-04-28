@@ -41,6 +41,9 @@ const SiteHeader = () => {
   const  history = useHistory()
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorTVEl, setAnchorTVEl] = useState(null);
+  
+  const [message, setMessage] = useState( '' );
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const authcontext = useContext(AuthContext)
@@ -119,13 +122,13 @@ const SiteHeader = () => {
       }    
   }  
   const routeChange = () =>{ 
-    var name = document.getElementById("search").value
+    var name = message//document.getElementById("searchText").value
     let path = `/search/` +name; 
     history.push(path);
   }
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      var name = document.getElementById("search").value
+      var name = message//document.getElementById("searchText").value
       let path = `/search/` +name; 
       history.push(path);
     }
@@ -250,9 +253,10 @@ const SiteHeader = () => {
             </>
           )}
           <Typography  variant="h6" className={classes.search}>             
-            <Input id ="search" className={classes.input}  placeholder="Movies Search" onKeyDown={handleKeyDown} />
+            <Input id ="searchText" className={classes.input}  placeholder="Movies Search" onKeyDown={handleKeyDown}
+            onChange={e => setMessage(e.target.value)} />
             <IconButton className={classes.searchButton} type="submit" sx={{ p: '5px' }} aria-label="search"
-            onClick={routeChange}>   
+              onClick={()=>{routeChange()}}>   
               <SearchIcon />            
             </IconButton>      
             {/* <Button className={classes.searchButton} variant="outlined" startIcon={<SearchIcon />} onClick={routeChange}/> */}

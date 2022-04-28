@@ -19,12 +19,14 @@ const MoviesContextProvider = (props) => {
     }
     setFavourites(updatedFavourites);
   };
-  const loadAllFavourites = async (movie) => {
-    const resultfav = await getFavouriteMovies(authcontext.userid);
-    const myfavourites =  resultfav.favourites.filter(t=>t != null);
-    setFavourites(myfavourites)
-  }
-  loadAllFavourites();
+  // const loadAllFavourites = async (movie) => {
+  //   const resultfav = await getFavouriteMovies(authcontext.userid);
+  //   console.log("Favotr list-------------------")
+  //   console.log(resultfav)
+  //   const myfavourites =  resultfav.favourites.filter(t=>t != null);
+  //   setFavourites(myfavourites)
+  // }
+  // loadAllFavourites();
   // We will use this function in a later section
   const removeFromFavourites = (movie) => {
     setFavourites(favourites.filter((mId) => mId !== movie.id));

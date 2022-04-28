@@ -23,6 +23,7 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 import 'bootstrap/dist/css/bootstrap.min.css';   
 import AuthContextProvider from "./contexts/authContext";
 import PrivateRoute from './components/privateRoute';
+import PublicRoute from './components/publicRoute';
 import AddToFavouritesIcon from "./components/cardIcons/addToFavourites";
 
 const queryClient = new QueryClient({
@@ -44,13 +45,13 @@ const App = () => {
         <SiteHeader />        
           <MoviesContextProvider>          
             <Switch>
-            <Route exact path="/login/" component={loginPage} />
+            <PublicRoute restricted={true} exact path="/login/" component={loginPage} />
             <PrivateRoute exact path="/fantasymovies/" component={FantasyMoviePage} />
             <Route exact path="/tvshows/popular" component={PopularTvShows} />
             <Route path="/tvshows/:id" component={tvShowsDetailPage} /> 
 
             <Route path="/searchcriteria/:generid/:lang/:year/:sort" component={MoviesCriteria} />          
-            <Route path="/search/:query" component={MoviesSearchPage} />
+            <PublicRoute restricted={true} path="/search/:query" component={MoviesSearchPage} />
 
             <Route path="/similar/:query" component={SimilarMovies} />          
             <Route path="/movies/toprated" component={TopRatedMoviesPage} />
