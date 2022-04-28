@@ -8,6 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import Fab from "@material-ui/core/Fab";  
 
+
 const useStyles = makeStyles((theme) => ({
   
 
@@ -29,32 +30,15 @@ const LoginPage = props => {
   const [password, setPassword] = useState("");
 
   const login = () => {
-    context.authenticate(email, password);
+    context.authenticate(email, password);    
   };
 
-//   const { from } = props.location.state || { from: { pathname: "/" } };
+  //const { from } = props.location.state || { from: { pathname: "/" } };
   
-  console.log(context)
-
-  // if (context.isAuthenticated === true) {
-  //   return <Redirect to={"/"} />;
-  // }
+  console.log(context)  
   return (
     <>                
     <div class="row">
-      {/* <div class="col s12 m6">
-        <h2>Login page</h2>
-          <p>You must log in to view the protected pages </p>
-          <input id="email" placeholder="email" onChange={e => {
-            setEmail(e.target.value);
-          }}></input><br />
-          <input id="password" type="password" placeholder="password" onChange={e => {
-            setPassword(e.target.value);
-          }}></input><br />          
-          <button onClick={login}>Log in</button>
-          <p>Not Registered?
-          <Link to="/signup">Sign Up!</Link></p>
-      </div> */}
     <div class="col s12 m6">
       {/* ---------------- Sign In--------------------- */}
       <CardContent className={classes.formControl}><br/>
@@ -73,17 +57,12 @@ const LoginPage = props => {
             }}                            
           />   
         </FormControl> 
-        {/* <FormControl className={classes.formControl}>  
-          <button onClick={login}>Log in</button>
-          <p>Not Registered?
-          <Link to="/signup">Sign Up!</Link></p>
-        </FormControl>              */}
         <br/> <br/> <br/> <br/>     
         <Fab className={classes.formbutton}
         color="primary"
         variant="extended" onClick={login}>        
           Log In
-        </Fab>
+        </Fab>        
       </CardContent>   
     </div>    
 </div>

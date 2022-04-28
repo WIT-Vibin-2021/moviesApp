@@ -16,7 +16,6 @@ import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import { MoviesContext } from "../../contexts/moviesContext";
 import {Tooltip} from "@material-ui/core"
-import Popup from "../PopUp";
 import { getVideo } from "../../api/tmdb-api";
 import { Modal} from 'react-bootstrap'; 
 

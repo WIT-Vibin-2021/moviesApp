@@ -22,6 +22,9 @@ import FantasyMoviePage from "./pages/fantasyMoviePage";
 import { ReactQueryDevtools } from 'react-query/devtools'
 import 'bootstrap/dist/css/bootstrap.min.css';   
 import AuthContextProvider from "./contexts/authContext";
+import PrivateRoute from './components/privateRoute';
+import PublicRoute from './components/publicRoute';
+import AddToFavouritesIcon from "./components/cardIcons/addToFavourites";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,23 +42,23 @@ const App = () => {
       <BrowserRouter>
         <SiteHeader />
         <AuthContextProvider>
-          <MoviesContextProvider>
-          
+        <SiteHeader />        
+          <MoviesContextProvider>          
             <Switch>
-            <Route exact path="/login/" component={loginPage} />
-            <Route exact path="/fantasymovies/" component={FantasyMoviePage} />
+            <PublicRoute restricted={true} exact path="/login/" component={loginPage} />
+            <PrivateRoute exact path="/fantasymovies/" component={FantasyMoviePage} />
             <Route exact path="/tvshows/popular" component={PopularTvShows} />
             <Route path="/tvshows/:id" component={tvShowsDetailPage} /> 
 
             <Route path="/searchcriteria/:generid/:lang/:year/:sort" component={MoviesCriteria} />          
-            <Route path="/search/:query" component={MoviesSearchPage} />
+            <PublicRoute restricted={true} path="/search/:query" component={MoviesSearchPage} />
 
             <Route path="/similar/:query" component={SimilarMovies} />          
             <Route path="/movies/toprated" component={TopRatedMoviesPage} />
             <Route exact path="/reviews/form" component={AddMovieReviewPage} />
             <Route path="/movies/upcoming" component={UpcomingMoviesPage} />
             <Route path="/reviews/:id" component={MovieReviewPage} />
-            <Route exact path="/movies/favourites" component={FavouriteMoviesPage} />
+            <PrivateRoute exact path="/movies/favourites" component={FavouriteMoviesPage} />
             <Route path="/movies/:id" component={MoviePage} />
             <Route exact path="/" component={HomePage} />
             <Redirect from="*" to="/" />

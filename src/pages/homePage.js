@@ -48,9 +48,9 @@ const HomePage = (props) => {
   }
 
   //Pagination - Open
-  //commented for pagination // const { data, error, isLoading, isError } = useQuery("discover", getMovies);  
+  
   const [page, setPage] = React.useState(1);  
-  const { data, error, isLoading, isError, isFetching, isPreviousData } = useQuery(["pages", {Pages:page} ],getMoviePages);  
+  const { data, error, isLoading, isError, isFetching, isPreviousData } = useQuery(["pages", page ],getMoviePages);  
 
   function handlePaginationChange(e, value) {
     setPage(value);    
@@ -79,7 +79,7 @@ const HomePage = (props) => {
       case "genre":
         newFilters =  [filterValues[0], newf, filterValues[2]];
         break;      
-      //default: newFilters = []; break;
+      default: newFilters = []; break;
     }
     setFilterValues(newFilters);
   };
@@ -89,7 +89,7 @@ const HomePage = (props) => {
 
   // console.log(data)
   // console.log(page)
-  // console.log("setPage")  
+  // console.log("setPage")   
   return (    
     <>      
       <PageTemplate
