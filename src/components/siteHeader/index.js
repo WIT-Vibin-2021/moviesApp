@@ -49,8 +49,9 @@ const SiteHeader = () => {
     { label: "Home", path: "/" },
     { label: "Favorites", path: "/movies/favourites" },
     { label: "Upcoming", path: "/movies/upcoming" },
-    { label: "Populat Tv Shows", path: "/tvshows/popular" },    
-    
+    { label: "Fantasy Movies", path: "/fantasymovies" },  
+    { label: "Populat Tv Shows", path: "/tvshows/popular" },          
+    { label: "Login", path: "/login" },          
   ];
 
   const handleMenuSelect = (pageURL) => {
@@ -61,6 +62,9 @@ const SiteHeader = () => {
     if (anchorEl !== event.currentTarget) {
       setAnchorEl(event.currentTarget);
     }
+  }
+
+  function handleLoginClick(event) {   
   }
 
   function handleTVClick(event) {
@@ -194,8 +198,13 @@ const handleKeyDown = (e) => {
                   <MenuItem onClick={() => handleMenuSelect( "/tvshows/popular")}>Popular</MenuItem>                                                 
                 </Menu>                 
                 {/* ------------------------  */}
-
-
+                <Button  color="inherit"
+                  aria-owns={anchorEl ? "simple-menu3" : undefined}
+                  aria-haspopup="true"
+                  onClick={() => handleMenuSelect( "/login")}             
+                >
+                <b>Login</b>
+                </Button>                            
               </div>
             </>
           )}
