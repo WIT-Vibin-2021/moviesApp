@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useContext  } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -14,7 +14,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import tmdbLogo from "../../images/tmdb.svg"
 import Input from '@material-ui/core/Input';
 import SearchIcon from '@material-ui/icons/Search';
-
+import { AuthContext } from "../../contexts/authContext";
 const useStyles = makeStyles((theme) => ({
   root: {      
     backgroundColor:"#FFFFFF",
@@ -43,7 +43,9 @@ const SiteHeader = () => {
   const [anchorTVEl, setAnchorTVEl] = useState(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const authcontext = useContext(AuthContext)
 
+  
   const open = Boolean(anchorEl);
   const menuOptions = [
     { label: "Home", path: "/" },
@@ -64,9 +66,6 @@ const SiteHeader = () => {
     }
   }
 
-  function handleLoginClick(event) {   
-  }
-
   function handleTVClick(event) {
     if (anchorTVEl !== event.currentTarget) {
       setAnchorTVEl(event.currentTarget);
@@ -85,20 +84,53 @@ const SiteHeader = () => {
     setAnchorTVEl(null);
   };
 
-
-
-const routeChange = () =>{ 
-  var name = document.getElementById("search").value
-  let path = `/search/` +name; 
-  history.push(path);
-}
-const handleKeyDown = (e) => {
-  if (e.key === 'Enter') {
+  const logoutFunction= (e) =>{  
+    console.log(authcontext)
+    if(authcontext != null) {
+      if (authcontext.isAuthenticated === true) {
+          authcontext.signout();          
+      }
+    }
+  }
+  const LogoutButtonVisibility = () => {
+    if(authcontext != null)    
+      if(authcontext.isAuthenticated)
+      {
+          return  <><Button id="logoutBtn" color="inherit"
+                    aria-owns={anchorEl ? "simple-menu3" : undefined}
+                    aria-haspopup="true"
+                    onClick={() => logoutFunction()}                      
+                  >
+                  <b>LogOut</b>
+                  </Button> Welcome ! {authcontext.email}</>            
+      }    
+  }
+  const LoginButtonVisibility = () => {
+    if(authcontext != null)    
+      if(!authcontext.isAuthenticated)
+      {
+        return  <Button  id="loginBtn" color="inherit"
+                  aria-owns={anchorEl ? "simple-menu3" : undefined}
+                  aria-haspopup="true"
+                  onClick={() => handleMenuSelect( "/login")}             
+                >
+                <b>Login</b>
+                </Button>
+      }    
+  }  
+  const routeChange = () =>{ 
     var name = document.getElementById("search").value
     let path = `/search/` +name; 
     history.push(path);
   }
-}
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      var name = document.getElementById("search").value
+      let path = `/search/` +name; 
+      history.push(path);
+    }
+  }
+
   return (     
     <div>
       <AppBar className={classes.root}
@@ -198,13 +230,22 @@ const handleKeyDown = (e) => {
                   <MenuItem onClick={() => handleMenuSelect( "/tvshows/popular")}>Popular</MenuItem>                                                 
                 </Menu>                 
                 {/* ------------------------  */}
-                <Button  color="inherit"
+                {/* <Button  id="loginBtn" color="inherit"
                   aria-owns={anchorEl ? "simple-menu3" : undefined}
                   aria-haspopup="true"
                   onClick={() => handleMenuSelect( "/login")}             
                 >
                 <b>Login</b>
-                </Button>                            
+                </Button> 
+                <Button id="logoutBtn" color="inherit"
+                  aria-owns={anchorEl ? "simple-menu3" : undefined}
+                  aria-haspopup="true"
+                  onClick={() => logoutFunction()}                      
+                >
+                <b>LogOut</b>
+                </Button>    */}
+                {LogoutButtonVisibility()}
+                {LoginButtonVisibility()}
               </div>
             </>
           )}
@@ -217,8 +258,8 @@ const handleKeyDown = (e) => {
             {/* <Button className={classes.searchButton} variant="outlined" startIcon={<SearchIcon />} onClick={routeChange}/> */}
           </Typography>
 
-        </Toolbar>
-      </AppBar>
+        </Toolbar>       
+      </AppBar>      
     </div>
   );
 };

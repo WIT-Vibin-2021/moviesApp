@@ -39,8 +39,8 @@ const App = () => {
       <BrowserRouter>
         <SiteHeader />
         <AuthContextProvider>
-          <MoviesContextProvider>
-          
+        <SiteHeader />
+          <MoviesContextProvider>          
             <Switch>
             <Route exact path="/login/" component={loginPage} />
             <Route exact path="/fantasymovies/" component={FantasyMoviePage} />

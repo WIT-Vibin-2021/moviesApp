@@ -8,6 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import Fab from "@material-ui/core/Fab";  
 
+
 const useStyles = makeStyles((theme) => ({
   
 
@@ -29,16 +30,12 @@ const LoginPage = props => {
   const [password, setPassword] = useState("");
 
   const login = () => {
-    context.authenticate(email, password);
+    context.authenticate(email, password);    
   };
 
-//   const { from } = props.location.state || { from: { pathname: "/" } };
+  //const { from } = props.location.state || { from: { pathname: "/" } };
   
-  console.log(context)
-
-  // if (context.isAuthenticated === true) {
-  //   return <Redirect to={"/"} />;
-  // }
+  console.log(context)  
   return (
     <>                
     <div class="row">
@@ -83,7 +80,7 @@ const LoginPage = props => {
         color="primary"
         variant="extended" onClick={login}>        
           Log In
-        </Fab>
+        </Fab>        
       </CardContent>   
     </div>    
 </div>

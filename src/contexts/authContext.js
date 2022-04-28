@@ -27,7 +27,7 @@ const AuthContextProvider = (props) => {
   const register = async (email, password, firstName, lastName) => {
     const result = await signup(email, password, firstName,lastName);
     console.log(result.code);
-    return (result.code == 201) ? true : false;
+    return (result.code === 201) ? true : false;
   };
 
   const signout = () => {
@@ -41,7 +41,7 @@ const AuthContextProvider = (props) => {
         authenticate,
         register,
         signout,
-        email
+        email      
       }}
     >
       {props.children}
