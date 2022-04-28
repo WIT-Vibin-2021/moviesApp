@@ -1,40 +1,39 @@
+
 import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import FantasyPage from "../components/Login";
+import SignUpPage from "../components/SignUp";
+import Grid from "@material-ui/core/Grid";
 import { AuthContext } from "../contexts/authContext";
-import { Link } from "react-router-dom";
 
-const LoginPage = props => {
+const FantasyMovies= (props) => { 
+  const useStyles = makeStyles((theme) => ({
+    root: {      
+      justifyContent: "space-around",      
+    },    
+  }));
+  const classes = useStyles();
   const context = useContext(AuthContext)
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const login = () => {
-    context.authenticate(email, password);
+    if (context.isAuthenticated === true) {
+      return <Redirect to={"/"} />;
+    }
+    return (    
+      <>   
+      <div >
+        <Grid container className={classes.root}>         
+          <Grid>
+          <FantasyPage
+            title="FantasyPage"/> 
+          </Grid>
+          <Grid  className={classes.root}>          
+            <SignUpPage
+            title="FantasyPage"/> 
+          </Grid>
+        </Grid>
+      </div>                        
+      </>
+    );
   };
-
-  const { from } = props.location.state || { from: { pathname: "/" } };
   
-  console.log(context)
-
-  if (context.isAuthenticated === true) {
-    return <Redirect to={from} />;
-  }
-  return (
-    <>
-      <h2>Login page</h2>
-      <p>You must log in to view the protected pages </p>
-      <input id="email" placeholder="email" onChange={e => {
-        setEmail(e.target.value);
-      }}></input><br />
-      <input id="password" type="password" placeholder="password" onChange={e => {
-        setPassword(e.target.value);
-      }}></input><br />
-      {/* Login web form  */}
-      <button onClick={login}>Log in</button>
-      <p>Not Registered?
-      <Link to="/signup">Sign Up!</Link></p>
-    </>
-  );
-};
-
-export default LoginPage;
+  export default FantasyMovies; 
