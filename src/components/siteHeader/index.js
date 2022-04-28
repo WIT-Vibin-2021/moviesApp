@@ -102,7 +102,7 @@ const SiteHeader = () => {
                     onClick={() => logoutFunction()}                      
                   >
                   <b>LogOut</b>
-                  </Button> Welcome ! {authcontext.email}</>            
+                  </Button> Welcome ! {authcontext.userName}</>            
       }    
   }
   const LoginButtonVisibility = () => {

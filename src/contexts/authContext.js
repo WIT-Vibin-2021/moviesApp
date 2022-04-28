@@ -1,5 +1,5 @@
 import React, { useState, createContext } from "react";
-import { login, signup } from "../api/movie-api";
+import { login, signup,getAccountByEmail } from "../api/movie-api";
 
 export const AuthContext = createContext(null);
 
@@ -8,6 +8,8 @@ const AuthContextProvider = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authToken, setAuthToken] = useState(existingToken);
   const [email, setEmail] = useState("");
+  const [userId, setAccUserId] = useState("");
+  const [userName, setAccUserName] = useState("");
 
   //Function to put JWT token in local storage.
   const setToken = (data) => {
@@ -20,7 +22,11 @@ const AuthContextProvider = (props) => {
     if (result.token) {
       setToken(result.token)
       setIsAuthenticated(true);
-      setEmail(email);
+      setEmail(email); 
+
+      const accountUserId = await getAccountByEmail(email);
+      setAccUserId(accountUserId.id);
+      setAccUserName(accountUserId.firstName);
     }
   };
 
@@ -41,7 +47,9 @@ const AuthContextProvider = (props) => {
         authenticate,
         register,
         signout,
-        email      
+        email,
+        userId,
+        userName      
       }}
     >
       {props.children}

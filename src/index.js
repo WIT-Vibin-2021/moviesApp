@@ -23,6 +23,7 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 import 'bootstrap/dist/css/bootstrap.min.css';   
 import AuthContextProvider from "./contexts/authContext";
 import PrivateRoute from './components/privateRoute';
+import AddToFavouritesIcon from "./components/cardIcons/addToFavourites";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -40,7 +41,7 @@ const App = () => {
       <BrowserRouter>
         <SiteHeader />
         <AuthContextProvider>
-        <SiteHeader />
+        <SiteHeader />        
           <MoviesContextProvider>          
             <Switch>
             <Route exact path="/login/" component={loginPage} />
