@@ -11,8 +11,11 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage'
 import TopRatedMoviesPage from './pages/topRatedMoviesPage'
+import NowPlayingMoviesPage from './pages/nowPlayingMoviesPage'
+import TrendingMoviesPage from './pages/trendingMoviesPage'
 import MoviesSearchPage from './pages/moviesSearchPage'
 import SimilarMovies from './pages/similarMovies'
+import RecommendedMovies from './pages/recommendedMovies'
 import MoviesCriteria from './pages/moviesCriteriaSearchPage'
 
 import tvShowsDetailPage from "./pages/tvShowsDetailsPage";
@@ -53,7 +56,10 @@ const App = () => {
             <Route path="/searchcriteria/:generid/:lang/:year/:sort" component={MoviesCriteria} />          
             <PublicRoute restricted={true} path="/search/:query" component={MoviesSearchPage} />
 
-            <Route path="/similar/:query" component={SimilarMovies} />          
+            <Route path="/recommended/:query" component={RecommendedMovies} />
+            <Route path="/similar/:query" component={SimilarMovies} />
+            <Route path="/movies/trending" component={TrendingMoviesPage} />    
+            <Route path="/movies/nowplaying" component={NowPlayingMoviesPage} />    
             <Route path="/movies/toprated" component={TopRatedMoviesPage} />
             <Route exact path="/reviews/form" component={AddMovieReviewPage} />
             <Route path="/movies/upcoming" component={UpcomingMoviesPage} />

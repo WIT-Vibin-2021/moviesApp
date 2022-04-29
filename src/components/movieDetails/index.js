@@ -96,7 +96,7 @@ const MovieDetails = ( {movie}) => {
         <Chip icon={<TheatersIcon />}label={`Released: ${movie.release_date}`} />        
       </Paper>  <br></br>
       <Paper component="ul" className={classes.chipSet} elevation={0} >      
-        <Tooltip  title={<h3 style={{ color: "white" }}>{movie.homepage}</h3>}>        
+        <Tooltip  title={<h6 style={{ color: "white" }}>{movie.homepage}</h6>}>        
         <Chip icon={<Language />}label="Movie Home Page" color="primary" variant="outlined" component="a" href={movie.homepage} clickable />  
         </Tooltip>
       </Paper>

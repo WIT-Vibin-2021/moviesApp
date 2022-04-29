@@ -1,15 +1,13 @@
 import React from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { useQuery } from "react-query";
-import { getSimilarMovies } from "../api/tmdb-api";
+import { getNowPlayingMovies } from "../api/tmdb-api";
 import useFiltering from "../hooks/useFiltering";
-import Spinner from "../components/spinner";
 import MovieFilterUI, {
   titleFilter,
   genreFilter,
 } from "../components/movieFilterUI";
 import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
-import { useParams } from "react-router-dom";
 
 const titleFiltering = {
   name: "title",
@@ -21,18 +19,14 @@ const genreFiltering = {
   value: "0",
   condition: genreFilter,
 };
- 
-const MoviesByKey = (props) => {
-  const { query } = useParams();
-  const { data, error, isLoading, isError } = useQuery(["movieSimilar",{ query: query }] , getSimilarMovies);
+
+const NowPlayingMoviesPage = (props) => {
+  const { data, error, isLoading, isError } = useQuery("nowplayingmovies", getNowPlayingMovies);
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [],
     [titleFiltering, genreFiltering]
   );
 
-  if (isLoading) {
-    return <Spinner />;
-  }
   if (isError) {
     return <h1>{error.message}</h1>;
   }
@@ -51,7 +45,7 @@ const MoviesByKey = (props) => {
   return (
     <>
       <PageTemplate
-        title={"Similar Movie"}
+        title="Now Playing"
         movies={displayedMovies}
         action={(movie) => {
           return <AddToFavouritesIcon movie={movie} />
@@ -66,4 +60,4 @@ const MoviesByKey = (props) => {
   );
 };
 
-export default MoviesByKey;
+export default NowPlayingMoviesPage;
