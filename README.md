@@ -47,6 +47,7 @@ __URL:__ /login
 ---
 __Key word search__
 > Search bar on top right corner of site header for searching movies by keyword. Result will be shown in a page with keyword used.
+> 
 __URL:__ /search/:keyword
 
 ![image](2.png)
