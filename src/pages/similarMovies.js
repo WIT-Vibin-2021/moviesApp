@@ -3,6 +3,7 @@ import PageTemplate from "../components/templateMovieListPage";
 import { useQuery } from "react-query";
 import { getSimilarMovies } from "../api/tmdb-api";
 import useFiltering from "../hooks/useFiltering";
+import Spinner from "../components/spinner";
 import MovieFilterUI, {
   titleFilter,
   genreFilter,
@@ -29,6 +30,9 @@ const MoviesByKey = (props) => {
     [titleFiltering, genreFiltering]
   );
 
+  if (isLoading) {
+    return <Spinner />;
+  }
   if (isError) {
     return <h1>{error.message}</h1>;
   }
