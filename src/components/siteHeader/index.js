@@ -206,8 +206,10 @@ const SiteHeader = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                   MenuListProps={{ onMouseLeave: handleClose }}
-                >
+                > 
+                  <MenuItem onClick={() => handleMenuSelect( "/movies/trending")}>Trending(Week)</MenuItem>                 
                   <MenuItem onClick={() => handleMenuSelect( "/movies/upcoming")}>Upcoming</MenuItem>
+                  <MenuItem onClick={() => handleMenuSelect( "/movies/nowplaying")}>Now Playing</MenuItem>
                   <MenuItem onClick={() => handleMenuSelect( "/movies/toprated")}>Top-Rated</MenuItem>                                 
                   <MenuItem onClick={() => handleMenuSelect( "/movies/favourites")}>Favorites</MenuItem>
                   <MenuItem onClick={() => handleMenuSelect( "/fantasymovies")}>Fantasy Movie Making</MenuItem>
