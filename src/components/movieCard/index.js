@@ -9,9 +9,12 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import JoinIcon from "@material-ui/icons/LinkRounded";
+import { Theaters, MovieSharp } from "@material-ui/icons";
+
 import CalendarIcon from "@material-ui/icons/CalendarTodayTwoTone";
 import StarRateIcon from "@material-ui/icons/StarRate";
-
+import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import { MoviesContext } from "../../contexts/moviesContext";
@@ -61,7 +64,7 @@ export default function MovieCard({ movie, action }) {
         ) : null
       }
       title={
-        <Tooltip  title={<h2 style={{ color: "white" }}>{movie.title}</h2>} >
+        <Tooltip  title={<h4 style={{ color: "white" }}>{movie.title}</h4>} >
           <Typography className={classes.text} variant="h5" component="p">
             {movie.title}{" "}
           </Typography>
@@ -100,6 +103,20 @@ export default function MovieCard({ movie, action }) {
           <Button variant="outlined" size="medium" color="primary">
             More Info ...
           </Button>
+        </Link>
+        <Link to={`/similar/${movie.id}`}>          
+          <Tooltip  title={<h6 style={{ color: "white" }}>Similar Movies</h6>} >
+            <IconButton aria-label="add to favorites" >
+              <MovieSharp color="primary" fontSize="large" />
+            </IconButton>
+          </Tooltip>        
+        </Link>
+        <Link to={`/recommended/${movie.id}`}>          
+          <Tooltip  title={<h6 style={{ color: "white" }}>Recommended Movies</h6>} >
+            <IconButton aria-label="add to favorites" >
+              <Theaters color="primary" fontSize="large" />
+            </IconButton>
+          </Tooltip>        
         </Link>
       </CardActions>
       <div>                           

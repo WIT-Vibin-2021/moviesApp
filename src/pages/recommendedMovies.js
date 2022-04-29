@@ -1,7 +1,7 @@
 import React from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { useQuery } from "react-query";
-import { getSimilarMovies } from "../api/tmdb-api";
+import { getRecommendedMovies } from "../api/tmdb-api";
 import useFiltering from "../hooks/useFiltering";
 import Spinner from "../components/spinner";
 import MovieFilterUI, {
@@ -24,7 +24,7 @@ const genreFiltering = {
  
 const MoviesByKey = (props) => {
   const { query } = useParams();
-  const { data, error, isLoading, isError } = useQuery(["movieSimilar",{ query: query }] , getSimilarMovies);
+  const { data, error, isLoading, isError } = useQuery(["recommended",{ query: query }] , getRecommendedMovies);
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [],
     [titleFiltering, genreFiltering]
@@ -51,7 +51,7 @@ const MoviesByKey = (props) => {
   return (
     <>
       <PageTemplate
-        title={"Similar Movie"}
+        title={"Recommended Movie"}
         movies={displayedMovies}
         action={(movie) => {
           return <AddToFavouritesIcon movie={movie} />
