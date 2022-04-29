@@ -42,36 +42,30 @@ Storybook
 
 __Login and Signup__
 > User can login or signup in this page. Both option is given side-to-side. Sign up details are saved to Mongo DB, and while login the details are authenticated with the DB data. Without login few options in the web app wont work.
-
 __URL:__ /login
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/1LoginPage.png)
 ---
 __Key word search__
 > Search bar on top right corner of site header for searching movies by keyword. Result will be shown in a page with keyword used.
-
 __URL:__ /search/:keyword
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/2KeywordSearch.png)
 ---
 __Multiple criteria search__
 > Search floating button on left side of the page is given to open the window of multiple critera search. Here users can select any options like Release year, Genre, Language and sort result based on popularity, rating, release date or orignal title. Result will be in a new page.
-
 __URL:__ /searchcriteria/:genre/:language/:year/:sortorder
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/3SearchWindow.png)
 ---
 __Filter Result__
 > Filter floating button on right side of the page is given to open the window of filtering the result. Here users can select any options like Key word, Genre, Language and sort result in ascending or descending order of result. Filter result will be in the same page. Note:This is a result filter.
-
 __URL:__ /
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/4FilterWindow.png)
 ---
 __Video Popup__
 > Related video of the movies can be viewd by clicking the poster of the movie while it is listed in the page, or the same can be achived on the details information page when click on the video button.
-
-__URL:__ /
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/5Video%20PopUp%201.png)
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/5Video%20PopUp%202.png)
@@ -93,35 +87,30 @@ __Pagination__
 ---
 __Fantasy Movie Making__
 > If user logged in, can access the Fantasy movie making page from the submenu of movies. Here user can give details of title, genre, language, release date(picker control), running time(picker control), multiple selection of cast members, add overview and finally, can upload the poster of the movie. And button to save.
-
 __URL:__ /fantasymovies
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/8FantacyMovie.png)
 ---
 __Trending Movies Page__
 > Listed out the Trending Movies of the week from TMDB API endpoint. 
-
 __URL:__ /movies/trending
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/9Trending%20Movies.png)
 ---
 __Now Playing Movies Page__
 > Listed out the Now Playing Movies from TMDB API endpoint. 
-
 __URL:__ /movies/nowplaying
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/10NowPlaying.png)
 ---
 __Top Rated Movies Page__
 > Listed out the top rated Movies from TMDB API endpoint. List sorted based on the movie rating.
-
 __URL:__ /movies/toprated
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/11TopRatted.png)
 ---
 __Similar Movies__
 > This can be vies from the button on the movie Card or from the movie details page. Once user clicked those buttons, based on the selected movie similar movies (keyword and genre based) will be listed out from the TMDB API endpoint in a new page.
-
 __URL:__ /similar/:movieId
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/12Similar%201.png)
@@ -129,61 +118,66 @@ __URL:__ /similar/:movieId
 ---
 __Recommended Movies__
 > Like Similar movies user can see the recommended movies list, once click on the button in the movie card. Once user clicked those buttons, based on the selected movie recommended movies will be listed out from the TMDB API endpoint in a new page.
-
 __URL:__ /recommended/:movieId
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/13%20Reccommended.png)
 ---
 __TV Shows (Popular)__
 > Tv Shows menu have a submenu to open the Popular tv shows, it will list out the popular tv shows from the TMDB endpoint.
-
 __URL:__ /tvshows/popular
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/14TVShows.png)
 ---
 __Upcoming Movies Page__
 > Listed out the upcoming Movies from TMDB API endpoint. List sorted based on the date of movie.
-
 __URL:__ /movies/upcoming
 
-![image](14.png)
+![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/14Upcoming.png)
 ---
 __Movies more info Page__
 > On the move card, given option for more information, if user click the button; New page will open with more details of the movie.
-
 __URL:__ /movies/:movieId
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/15MoreInfo%20Movies.png)
 ---
 __Review Summary__
-> Movies page more details page have button on the top right for seeing the review Summary.
-
+> Movies page more details page have button on the top right for seeing the review Summary
 __URL:__ /movies/:movieId
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/16ReviewSummary.png)
 ---
-__Full Review __
-> From the summary window, if user wish to read full review, can click on the Full Review link. Which show the full review in the same page.
 
+__Full Review__
+> From the summary window, if user wish to read full review, can click on the Full Review link. Which show the full review in the same page.
 __URL:__ /movies/:movieId
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/17FullReview.png)
+
 ---
+
 __Favourite Movies__
 > + User can set the Favourite movied if the user is loggedin. Favorite button on the card will set the to Favourite list. Which will be saved to the Mongo DB and can be viewd in the favorite movie page.
 > + User can delete the favorite movies from this page, with the detele button.
 > + User can also write reviews for the movied my clicking the review icon next to delete.
-
 __URL:__ /movies/favourites
 
-> * Favorite Icons
+> Favorite Icons
+
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/18Fav%20Button.png)
-> * Favorite Page
+
+> Favorite Page
+
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/18%203%20Fav.png)
-> * Favorite Saved to Mongo DB - Compass
+
+> Favorite Saved to Mongo DB - Compass
+
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/18%202%20Fav%20DB.png)
-> * Favorite movies - Write review
+
+> Favorite movies - Write review
+__URL:__ /movies/favourites/form
+
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/18%204%20Fav.png)
+
 ---
 
 ## Storybook.
@@ -257,6 +251,8 @@ __URL:__ /movies/favourites
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/sb13%20tv%20header.png)
 
+----
+
 ### Server state caching.
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/Serverstate%20caching.png)
@@ -277,18 +273,47 @@ __URL:__ /movies/favourites
 
 ## Authentication.
 
-[Briefly explain the method used for supporting authentication and include any relevant screenshots (e.g. Dev tools Network tab for session keys). State which parts of the app's functionality require authentication, e.g. the Favourites feature.]
+> I have created the API for sign up and login authentication. Data is saved to Mongo DB on movie app API call. Password is been encrypted before saving to the database.
++ Private route - Based on the login authentication, two sub menus of movie is set as private route. If user access those menus and user is not loggedin, app will redirect the page to Login Page. The two menus are 
+    + Favorite Movies 
+    + Fantasy Movies Making
++ The Favorite button given in the movies card is also blocked based on the authentication.
++ While Sign up, the external API is called and all the JSON body is passed to the API end point, where the system encrypte the password and save to "Accounts" in movies_db.
+![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/PrivateRoute.png)
+![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/XLogin%20API%20CALL.png)
 
-## Algorithm (if relevant).
+__POST API - Sign UP__ localhost:8080/api/accounts
+__POST API - Authentication__ localhost:8080/api/accounts/security/token
+__GET API - Account Details__ localhost:8080/api/accounts/email/:emailId
+__POST API - Favorite__ localhost:8080/api/accounts/:userId/favourites
 
-[State the purpose of the algorithm you chose to implement and explain, in general, the computation model used.]
 
 ## Additional Information.
 
-[Highlight any other aspects of your app's design or implementation that is non-standard and worthy of mention.]
+> Color and deign is inspired by the "https://www.themoviedb.org/".
+> TMDB API used
+    + 1. Movies Genres List : https://api.themoviedb.org/3/genre/movie/list?api_key=<<api_key>>&language=en-US
+    + 2. Language List : https://api.themoviedb.org/3/configuration/languages?api_key=<<api_key>>
+    + 3. Peoples Popular: https://api.themoviedb.org/3/person/popular?api_key=<<api_key>>&language=en-US&page=1
+    + 4. Movies Image: https://api.themoviedb.org/3/movie/{movieid}/images?api_key=<<api_key>>
+    + 5. Video of Movie: http://api.themoviedb.org/3/movie/{movieId+}/videos?api_key=<<api_key>>
 
-[image1]: ./images/image1.png
-[image2]: ./images/image2.png
-[image3]: ./images/image3.png
-[image4]: ./images/image4.png
-[image5]: ./images/image5.png
+    + 6. Key Word Search: https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&query={keyword}&page=1&include_adult=false
+    + 7. Serach Criteria Movies: https://api.themoviedb.org/3/discover/movie?api_key=<<api_key>>&with_genres={generid}&language={lang}&year={year}&sort_by={sortcode}&include_adult=false&include_video=false&page=1
+
+    + 8. Movies Details : https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>
+    + 9. Movies Review: https://api.themoviedb.org/3/movie/${movieid}/reviews?api_key=<<api_key>>
+
+    + 10. TV Shows Popular: https://api.themoviedb.org/3/tv/popular?api_key=<<api_key>>&language=en-US&page={page}
+    + 11. TV Show Details: https://api.themoviedb.org/3/tv/{tvid}?api_key=<<api_key>>&language=en-US
+    + 12. TV Videos: https://api.themoviedb.org/3/tv/{tvId}/videos?api_key=<<api_key>>&language=en-US
+
+    + 13. Movies Discover : https://api.themoviedb.org/3/discover/movie?api_key=<<api_key>>&language=en-US&include_adult=false&include_video=false&page={page}
+    + 14. Upcoming Movies: https://api.themoviedb.org/3/movie/upcoming?api_key=<<api_key>>&language=en-US&include_adult=false&include_video=false&page=1
+    + 15. Top Rated Movies: https://api.themoviedb.org/3/movie/top_rated?api_key=<<api_key>>&language=en-US&include_adult=false&include_video=true&page=1
+    + 16. Similar Movies: https://api.themoviedb.org/3/movie/{movieid}/similar?api_key=<<api_key>>
+    + 17. Now Playing Movies: https://api.themoviedb.org/3/movie/now_playing?api_key=<<api_key>>&language=en-US&page=1
+    + 18. Trending Movies: https://api.themoviedb.org/3/trending/movie/week?api_key=<<api_key>>
+    + 19. Recommended Movies : https://api.themoviedb.org/3/movie/{movieid}/recommendations?api_key=<<api_key>>&language=en-US&page=1
+
+    
