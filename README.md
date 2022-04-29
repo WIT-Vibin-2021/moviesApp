@@ -312,6 +312,10 @@ __URL:__ /movies/favourites/form
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/PrivateRoute.png)
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/XLogin%20API%20CALL.png)
 
+> Private route demo.
+> 
+![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/PrivateRoute.gif)
+
 __POST API - Sign UP__ : localhost:8080/api/accounts
 
 __POST API - Authentication__ : localhost:8080/api/accounts/security/token
@@ -351,4 +355,7 @@ __POST API - Favorite__ : localhost:8080/api/accounts/:userId/favourites
     + 18. Trending Movies: https://api.themoviedb.org/3/trending/movie/week?api_key=<<api_key>>
     + 19. Recommended Movies : https://api.themoviedb.org/3/movie/{movieid}/recommendations?api_key=<<api_key>>&language=en-US&page=1
 
+## Youtube Demo Video
+
+> https://www.youtube.com/watch?v=HIdzE7bYtt4 
     
