@@ -43,7 +43,7 @@ __Login and Signup__
 > User can login or signup in this page. Both option is given side-to-side. Sign up details are saved to Mongo DB, and while login the details are authenticated with the DB data. Without login few options in the web app wont work.
 __URL:__ /login
 
-![image](1.png)
+![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/1LoginPage.png)
 ---
 __Key word search__
 > Search bar on top right corner of site header for searching movies by keyword. Result will be shown in a page with keyword used.
