@@ -177,7 +177,7 @@ __URL:__ /movies/:movieId
 __Full Review__
 > From the summary window, if user wish to read full review, can click on the Full Review link. Which show the full review in the same page.
 
-__URL:__ /movies/:movieId
+__URL:__ /reviews/:reviewId
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/17FullReview.png)
 
@@ -312,13 +312,13 @@ __URL:__ /movies/favourites/form
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/PrivateRoute.png)
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/XLogin%20API%20CALL.png)
 
-__POST API - Sign UP__ localhost:8080/api/accounts
+__POST API - Sign UP__ : localhost:8080/api/accounts
 
-__POST API - Authentication__ localhost:8080/api/accounts/security/token
+__POST API - Authentication__ : localhost:8080/api/accounts/security/token
 
-__GET API - Account Details__ localhost:8080/api/accounts/email/:emailId
+__GET API - Account Details__ : localhost:8080/api/accounts/email/:emailId
 
-__POST API - Favorite__ localhost:8080/api/accounts/:userId/favourites
+__POST API - Favorite__ : localhost:8080/api/accounts/:userId/favourites
 
 
 ## Additional Information.
