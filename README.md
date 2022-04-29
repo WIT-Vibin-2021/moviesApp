@@ -29,6 +29,7 @@ Part of lab and modified
 + Movie details page(Movies external webpage open in new tab, more details, structure redesigned)
 + ToolTip on mouse hover
 + Movie Card - Added functionality for Video popup, Recommended movies, Similar movies
+
 Storybook
 + All components 
     * Login, Signup
@@ -41,30 +42,36 @@ Storybook
 
 __Login and Signup__
 > User can login or signup in this page. Both option is given side-to-side. Sign up details are saved to Mongo DB, and while login the details are authenticated with the DB data. Without login few options in the web app wont work.
+
 __URL:__ /login
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/1LoginPage.png)
 ---
 __Key word search__
 > Search bar on top right corner of site header for searching movies by keyword. Result will be shown in a page with keyword used.
+
 __URL:__ /search/:keyword
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/2KeywordSearch.png)
 ---
 __Multiple criteria search__
 > Search floating button on left side of the page is given to open the window of multiple critera search. Here users can select any options like Release year, Genre, Language and sort result based on popularity, rating, release date or orignal title. Result will be in a new page.
+
 __URL:__ /searchcriteria/:genre/:language/:year/:sortorder
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/3SearchWindow.png)
 ---
 __Filter Result__
 > Filter floating button on right side of the page is given to open the window of filtering the result. Here users can select any options like Key word, Genre, Language and sort result in ascending or descending order of result. Filter result will be in the same page. Note:This is a result filter.
+
 __URL:__ /
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/4FilterWindow.png)
 ---
 __Video Popup__
 > Related video of the movies can be viewd by clicking the poster of the movie while it is listed in the page, or the same can be achived on the details information page when click on the video button.
+
+__URL:__ /
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/5Video%20PopUp%201.png)
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/5Video%20PopUp%202.png)
@@ -86,30 +93,35 @@ __Pagination__
 ---
 __Fantasy Movie Making__
 > If user logged in, can access the Fantasy movie making page from the submenu of movies. Here user can give details of title, genre, language, release date(picker control), running time(picker control), multiple selection of cast members, add overview and finally, can upload the poster of the movie. And button to save.
+
 __URL:__ /fantasymovies
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/8FantacyMovie.png)
 ---
 __Trending Movies Page__
 > Listed out the Trending Movies of the week from TMDB API endpoint. 
+
 __URL:__ /movies/trending
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/9Trending%20Movies.png)
 ---
 __Now Playing Movies Page__
 > Listed out the Now Playing Movies from TMDB API endpoint. 
+
 __URL:__ /movies/nowplaying
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/10NowPlaying.png)
 ---
 __Top Rated Movies Page__
 > Listed out the top rated Movies from TMDB API endpoint. List sorted based on the movie rating.
+
 __URL:__ /movies/toprated
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/11TopRatted.png)
 ---
 __Similar Movies__
 > This can be vies from the button on the movie Card or from the movie details page. Once user clicked those buttons, based on the selected movie similar movies (keyword and genre based) will be listed out from the TMDB API endpoint in a new page.
+
 __URL:__ /similar/:movieId
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/12Similar%201.png)
@@ -117,36 +129,42 @@ __URL:__ /similar/:movieId
 ---
 __Recommended Movies__
 > Like Similar movies user can see the recommended movies list, once click on the button in the movie card. Once user clicked those buttons, based on the selected movie recommended movies will be listed out from the TMDB API endpoint in a new page.
+
 __URL:__ /recommended/:movieId
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/13%20Reccommended.png)
 ---
 __TV Shows (Popular)__
 > Tv Shows menu have a submenu to open the Popular tv shows, it will list out the popular tv shows from the TMDB endpoint.
+
 __URL:__ /tvshows/popular
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/14TVShows.png)
 ---
 __Upcoming Movies Page__
 > Listed out the upcoming Movies from TMDB API endpoint. List sorted based on the date of movie.
+
 __URL:__ /movies/upcoming
 
 ![image](14.png)
 ---
 __Movies more info Page__
 > On the move card, given option for more information, if user click the button; New page will open with more details of the movie.
+
 __URL:__ /movies/:movieId
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/15MoreInfo%20Movies.png)
 ---
 __Review Summary__
-> Movies page more details page have button on the top right for seeing the review Summary
+> Movies page more details page have button on the top right for seeing the review Summary.
+
 __URL:__ /movies/:movieId
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/16ReviewSummary.png)
 ---
 __Full Review __
 > From the summary window, if user wish to read full review, can click on the Full Review link. Which show the full review in the same page.
+
 __URL:__ /movies/:movieId
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/17FullReview.png)
@@ -155,37 +173,93 @@ __Favourite Movies__
 > + User can set the Favourite movied if the user is loggedin. Favorite button on the card will set the to Favourite list. Which will be saved to the Mongo DB and can be viewd in the favorite movie page.
 > + User can delete the favorite movies from this page, with the detele button.
 > + User can also write reviews for the movied my clicking the review icon next to delete.
+
 __URL:__ /movies/favourites
 
+> * Favorite Icons
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/18Fav%20Button.png)
+> * Favorite Page
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/18%203%20Fav.png)
+> * Favorite Saved to Mongo DB - Compass
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/18%202%20Fav%20DB.png)
+> * Favorite movies - Write review
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/18%204%20Fav.png)
 ---
 
 ## Storybook.
 
-[Include a screenshot(s) from the Storybook UI and highlight the stories for new components developed.]
+> List of new components in the story book
 
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/SB0000.png)
+
+
+> Search Criteria component
+
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/SB%201%20Search.png)
+
+
+> Filter the movies component
+
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/SB2%20Filter.png)
-![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/SB2%20Filter.png)
+
+
+> Fantasy Movie Maker component
+
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/SB3%20Fantasy%20Movie.png)
+
+
+> Login component
+
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/SB4%20LOGIN.png)
-![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/SB5%20MOVIE%20CARD.png)
-![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/SB6%20Movie%20card%20error.png)
-![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/sb7%20movie%20details.png)
-![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/sb8movie%20header.png)
+
+
+> Sign Up component
+
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/sb9SignUp.png)
+
+
+> Movie Card component
+
+![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/SB5%20MOVIE%20CARD.png)
+
+
+> Movie Card exception component
+
+![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/SB6%20Movie%20card%20error.png)
+
+
+> Movie Details component
+
+![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/sb7%20movie%20details2.png)
+
+
+> Movie header component
+
+![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/sb8movie%20header.png)
+
+
+> TV Card component
+
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/sb10tv%20acrd.png)
+
+
+> TV Card exception component
+
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/sb11%20tv%20error.png)
-![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/sb12%20tv%20details.png)
+
+
+> TV Details component
+
+![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/sb12%20tv%20details2.png)
+
+
+> TV details header component
+
 ![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/sb13%20tv%20header.png)
 
 ### Server state caching.
 
-![][image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/Serverstate%20caching.png)
+![image](https://github.com/WIT-Vibin-2021/moviesApp/blob/master/images/Serverstate%20caching.png)
 
 + [peoples] - List of popular peoples from TMDB endpoint.
 + [genres] - List of genres from TMDB endpoint.
