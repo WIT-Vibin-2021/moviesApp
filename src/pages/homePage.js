@@ -135,7 +135,7 @@ const HomePage = (props) => {
           page={page}
           onChange={handlePaginationChange}
         />        
-        </div>
+        </div><br></br>
     </>
   );
 };

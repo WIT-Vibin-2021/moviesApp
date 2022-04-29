@@ -29,7 +29,7 @@ const sortingOrderValue = {
   condition: sortingValue,
 };
 const TrendingMoviesPage = (props) => {  
-  const { data, error, isLoading, isError } = useQuery("upcoming", getTrendingMovies);
+  const { data, error, isLoading, isError } = useQuery("trending", getTrendingMovies);
 
   // useFiltering is a Hook
   const { filterValues, setFilterValues, filterFunction } = useFiltering(

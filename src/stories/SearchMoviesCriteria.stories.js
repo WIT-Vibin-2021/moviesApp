@@ -15,7 +15,7 @@ const queryClient = new QueryClient({
   },
 });
 export default {
-  title: "Home Page/SearchMoviesCriteria",
+  title: "Filter & Search/SearchMoviesCriteria",
   component: SearchMoviesCriteria,
   decorators: [
     (Story) => <MemoryRouter initialEntries={["/"]}>{Story()}</MemoryRouter>,
