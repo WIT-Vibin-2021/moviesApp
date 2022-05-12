@@ -7,7 +7,16 @@ export const signup = (email, password, firstName, lastName) => {
         body: JSON.stringify({ email: email, password: password, firstName: firstName, lastName: lastName })
     }).then(res => res.json())
 };
-
+export const postFantasyMovie = (title, genre, language, release, time, overview) => {
+    return fetch('/api/fantasymovies', {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': window.localStorage.getItem('token')
+        },
+        method: 'post',
+        body: JSON.stringify({ title: title, genre: genre, language: language, release: release,time:time,overview:overview })
+    }).then(res => res.json())
+}; 
 export const login = (email, password) => {
     console.log({ 
         body: JSON.stringify({ email: email, password: password })
@@ -43,7 +52,8 @@ export const getAccountByEmail = (email) => {
 export const getFavouriteMovies = (userId) => {
     return fetch(`/api/accounts/${userId}/favourites`, {
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': window.localStorage.getItem('token')
         },
         method: 'post',
     }).then(res => res.json())

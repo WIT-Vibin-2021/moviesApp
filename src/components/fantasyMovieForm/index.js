@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React,{useEffect, useState,useContext} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
@@ -12,6 +12,7 @@ import { useQuery } from "react-query";
 import FilterListIcon from "@material-ui/icons/FilterList"
 import Fab from "@material-ui/core/Fab";  
 import DatePicker from "react-datepicker";
+import { AuthContext } from "../../contexts/authContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,18 +49,21 @@ export default function FantasyMovies(props) {
           setLanguages(datalanguages);
         });    
       }, []);
-    
-    const [genrevalue, setGenreValue] = useState([]);
-    const [Langvalue, setLangValue] = useState([]);
+    const context = useContext(AuthContext)
     const classes = useStyles();
     const { data:dataG, error, isLoading, isError } = useQuery("genres", getGenres);
     const { data:dataC, error2, isLoading2, isError2 } = useQuery("peoples", getPeoples);    
     
     const [datalanguages, setLanguages] = useState([]);    
-    const [datalanguages2, setLanguages2] = useState([]);    
-    const [datagenres, setGenres] = useState([]);
-    
-    const [startDate, setStartDate] = useState("");    
+    //const [datalanguages2, setLanguages2] = useState([]);    
+    //const [datagenres, setGenres] = useState([]);
+
+    const [titlevalue, setTitle] = useState([]);
+    const [genrevalue, setGenreValue] = useState([]);
+    const [Langvalue, setLangValue] = useState([]);
+    const [releaseDate, setStartDate] = useState("");    
+    const [timevalue, setTime] = useState([]);
+    const [overviewvalue, setOverView] = useState([]);
 
     var genres=[];
      if (dataG!==undefined)  
@@ -85,8 +89,10 @@ export default function FantasyMovies(props) {
             : event.target.value
         }));
     };
-    const createMovie = () =>{     
-
+    const createMovie = () =>{        
+        console.log("Fantasy Movie Saving...")
+        console.log(genrevalue)
+        context.fantasyMoviePost(titlevalue, genrevalue.toString(), Langvalue, releaseDate, timevalue,overviewvalue);       
     }
   return (
     <>
@@ -94,12 +100,13 @@ export default function FantasyMovies(props) {
         <Typography variant="h5" component="h1"className={classes.formControl}>            
           Fantasy Movies Creation
           </Typography>
-        {/* --------Serach--------- */} 
+        {/* --------Title--------- */} 
         <FormControl className={classes.formControl}>          
           <TextField                      
             id="title"
             label="Title of the movie"
-            type="search"                            
+            type="search"   
+            onChange={e => setTitle(e.target.value)}                         
           />    
         </FormControl>
         {/* -----------------Genres-------- */}
@@ -144,11 +151,11 @@ export default function FantasyMovies(props) {
           </Select>
           </FormControl>
 
-          {/* ------------ Year-------- */}
+          {/* ------------Release Date-------- */}
           <FormControl className={classes.formControl}>
           <font face="Arial" size="20px">Release Date</font>          
           <DatePicker className={classes.datepicker} id="yearSelect"
-            selected={startDate}            
+            selected={releaseDate}            
             showDatePicker
             onChange={(date) => setStartDate(date)}
             dateFormat="dd/MM/yyyy"
@@ -156,10 +163,13 @@ export default function FantasyMovies(props) {
           />          
         </FormControl>
         <br/>
+          {/* ------------Running Time-------- */}
         <FormControl className={classes.formControl}>          
         <font face="Arial" size="20px">Running Time</font>
-         <input type="time" step={1} />    
+         <input type="time" step={1} 
+          onChange={e => setTime(e.target.value)}/>    
         </FormControl>
+          {/* ------------Cast-------- */}
         <FormControl className={classes.formControl}>    
             <TextField 
                 select
@@ -182,15 +192,18 @@ export default function FantasyMovies(props) {
             </TextField>
         </FormControl>
         <br/>
+          {/* ------------Overview-------- */}
         <FormControl className={classes.formControlOverview}>          
           <TextField                      
             id="overView"
             label="OverView"
-            type="text"                            
+            type="text"  
+            onChange={e => setOverView(e.target.value)}                          
           />    
         </FormControl>
 
       </CardContent>    
+        {/* ------------Save Button-------- */}
         <FormControl className={classes.formControl}>          
             <input type="file"/>                          
         </FormControl><br/>

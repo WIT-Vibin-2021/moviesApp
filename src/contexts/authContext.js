@@ -1,5 +1,5 @@
 import React, { useState, createContext } from "react";
-import { login, signup,getAccountByEmail } from "../api/movie-api";
+import { login, signup,getAccountByEmail, postFantasyMovie } from "../api/movie-api";
 
 export const AuthContext = createContext(null);
 
@@ -29,10 +29,16 @@ const AuthContextProvider = (props) => {
       setAccUserName(accountUserId.firstName);
     }
   };
-
+ 
   const register = async (email, password, firstName, lastName) => {
     const result = await signup(email, password, firstName,lastName);
     console.log(result.code);
+    return (result.code === 201) ? true : false;
+  };
+
+  const fantasyMoviePost = async (title, genre, language, release, time, overview) => {
+    const result = await postFantasyMovie(title, genre, language, release, time, overview);
+    console.log(result.id);
     return (result.code === 201) ? true : false;
   };
 
@@ -46,6 +52,7 @@ const AuthContextProvider = (props) => {
         isAuthenticated,
         authenticate,
         register,
+        fantasyMoviePost,
         signout,
         email,
         userId,
