@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import { login, signup,getAccountByEmail, postFantasyMovie } from "../api/movie-api";
 
 export const AuthContext = createContext(null);
@@ -27,9 +27,28 @@ const AuthContextProvider = (props) => {
       const accountUserId = await getAccountByEmail(email);
       setAccUserId(accountUserId.id);
       setAccUserName(accountUserId.firstName);
+      localStorage.setItem("email", email)
+      localStorage.setItem("userId", accountUserId.id)      
     }
   };
  
+  useEffect(()=>{    
+    const LStoken =window.localStorage.getItem("token");
+    const LSemail =window.localStorage.getItem("email");
+    const LSuserid =window.localStorage.getItem("userId");
+    if(LStoken!=null)
+      setAuthToken(LStoken)
+    
+    if(LSemail!=null)
+      setEmail(LSemail)
+    
+    if(LSuserid!=null)
+    {
+      setAccUserId(LSuserid)
+      setIsAuthenticated(true);  
+    }
+
+  })
   const register = async (email, password, firstName, lastName) => {
     const result = await signup(email, password, firstName,lastName);
     console.log(result.code);
@@ -44,6 +63,11 @@ const AuthContextProvider = (props) => {
 
   const signout = () => {
     setTimeout(() => setIsAuthenticated(false), 100);
+    setIsAuthenticated(false);
+    setToken(null);
+    setEmail(null); 
+    setAccUserId(null);
+    localStorage.clear()
   }
 
   return (

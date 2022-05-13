@@ -40,6 +40,17 @@ export const addFavouriteMovies = (userid, movieid) => {
     }).then(res => res.json())
 };
 
+export const removeFavouriteMovies = (userid, movieid) => {
+    return fetch(`/api/accounts/${userid}/favourites/${movieid}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'token': window.localStorage.getItem('token')
+        },
+        method: 'delete',
+        body: JSON.stringify({ movieId: movieid })
+    }).then(res => res.json())
+};
+
 export const getAccountByEmail = (email) => {
     return fetch(`/api/accounts/email/${email}`, {
         headers: {
