@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useEffect,useState } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries } from "react-query";
@@ -8,6 +8,9 @@ import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, { titleFilter } from "../components/movieFilterUI";
 import RemoveFromFavourites from "../components/cardIcons/removeFromFavourites";
 import WriteReview from "../components/cardIcons/writeReview";
+
+import { getFavouriteMovies } from "../api/movie-api";
+import { AuthContext } from "../contexts/authContext";
 
 const titleFiltering = {
   name: "title",
@@ -25,6 +28,20 @@ export const genreFiltering = {
 };
 
 const FavouriteMoviesPage = () => {
+  const [datafavmovies, setfavmovies] = useState([]);
+  const authcontext = useContext(AuthContext);
+  // console.log(`Fav page-----` )
+  // console.log(authcontext.userId)
+  // API Call for list of language
+  useEffect(() => {
+    getFavouriteMovies(authcontext.userId).then((datafavmovies) => {
+      setfavmovies(datafavmovies);
+    });    
+  }, []);
+  // console.log(`Fav page--result---` )
+  // console.log(datalanguages)
+
+  // --------------------------------------
   const { favourites: movieIds } = useContext(MoviesContext);
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [],
@@ -33,7 +50,7 @@ const FavouriteMoviesPage = () => {
 
   // Create an array of queries and run in parallel.
   const favouriteMovieQueries = useQueries(
-    movieIds.map((movieId) => {
+    datafavmovies.map((movieId) => {
       return {
         queryKey: ["movie", { id: movieId }],
         queryFn: getMovie,

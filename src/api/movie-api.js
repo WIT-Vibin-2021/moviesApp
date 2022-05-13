@@ -53,8 +53,8 @@ export const getFavouriteMovies = (userId) => {
     return fetch(`/api/accounts/${userId}/favourites`, {
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': window.localStorage.getItem('token')
+            'token': window.localStorage.getItem('token')
         },
-        method: 'post',
+        method: 'get',
     }).then(res => res.json())
 };
