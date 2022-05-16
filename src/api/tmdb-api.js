@@ -215,19 +215,37 @@
     };
   // Movies Search by Keywords
 
-  //Pagination - Open - TV Shows
-  export const getTvShowsPages = (args) => {    
-    console.log(`${args.queryKey[1]}`)  
-    return fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${args.queryKey[1]}`)    
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(response.json().message);
-      }
-      return response.json();
-    })
-    .catch((error) => {
-      throw error
-   });
+  // //Pagination - Open - TV Shows
+  // export const getTvShowsPages = (args) => {    
+  //   console.log(`${args.queryKey[1]}`)  
+  //   return fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${args.queryKey[1]}`)    
+  //   .then((response) => {
+  //     if (!response.ok) {
+  //       throw new Error(response.json().message);
+  //     }
+  //     return response.json();
+  //   })
+  //   .catch((error) => {
+  //     throw error
+  //  });
+  // };
+
+  export const getTvShowsPages = (args) => {
+    return fetch(`/api/movies/populartvshows/${args.queryKey[1]}`, {
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      method: 'get',
+  })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.json().message);
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        throw error;
+      });
   };
   //Pagination - Close - TV Shows
 

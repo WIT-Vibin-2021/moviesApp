@@ -93,6 +93,11 @@ export default function FantasyMovies(props) {
         console.log("Fantasy Movie Saving...")
         console.log(genrevalue)
         context.fantasyMoviePost(titlevalue, genrevalue.toString(), Langvalue, releaseDate, timevalue,overviewvalue);       
+        if (titlevalue.values !=="")
+        {
+          alert("Fantasy Movie is added to the system.")    
+          window.location.reload(false)
+        }
     }
   return (
     <>
