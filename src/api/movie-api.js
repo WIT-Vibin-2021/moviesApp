@@ -7,7 +7,16 @@ export const signup = (email, password, firstName, lastName) => {
         body: JSON.stringify({ email: email, password: password, firstName: firstName, lastName: lastName })
     }).then(res => res.json())
 };
-
+export const postFantasyMovie = (title, genre, language, release, time, overview) => {
+    return fetch('/api/fantasymovies', {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': window.localStorage.getItem('token')
+        },
+        method: 'post',
+        body: JSON.stringify({ title: title, genre: genre, language: language, release: release,time:time,overview:overview })
+    }).then(res => res.json())
+}; 
 export const login = (email, password) => {
     console.log({ 
         body: JSON.stringify({ email: email, password: password })
@@ -31,6 +40,17 @@ export const addFavouriteMovies = (userid, movieid) => {
     }).then(res => res.json())
 };
 
+export const removeFavouriteMovies = (userid, movieid) => {
+    return fetch(`/api/accounts/${userid}/favourites/${movieid}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'token': window.localStorage.getItem('token')
+        },
+        method: 'delete',
+        body: JSON.stringify({ movieId: movieid })
+    }).then(res => res.json())
+};
+
 export const getAccountByEmail = (email) => {
     return fetch(`/api/accounts/email/${email}`, {
         headers: {
@@ -43,8 +63,9 @@ export const getAccountByEmail = (email) => {
 export const getFavouriteMovies = (userId) => {
     return fetch(`/api/accounts/${userId}/favourites`, {
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'token': window.localStorage.getItem('token')
         },
-        method: 'post',
+        method: 'get',
     }).then(res => res.json())
 };
